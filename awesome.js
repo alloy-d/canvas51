@@ -24,6 +24,37 @@ var Star = new Class({
           },
 });
 
+var TwinklingStar = new Class({
+    Extends: Star,
+    initialize: function(options) {
+                    this.parent(options);
+                    if (this.brightness < 4) this.brightness = 4;
+                    this.color = "#eeeeee";
+                    this.stepSeed = Math.random() * Math.PI;
+                },
+    draw: function(context, width, height, step) {
+              var x = this.x * width / 1000;
+              var y = this.y * height / 1000;
+              var brightness = this.brightness;
+              if (typeof(step) === 'number') {
+                  brightness += Math.sin(step + this.stepSeed);
+              }
+
+              context.save();
+              context.fillStyle = this.color;
+              context.beginPath();
+              context.moveTo(x - brightness, y);
+              context.quadraticCurveTo(x, y, x, y - brightness);
+              context.quadraticCurveTo(x, y, x + brightness, y);
+              context.quadraticCurveTo(x, y, x, y + brightness);
+              context.quadraticCurveTo(x, y, x - brightness, y);
+              context.fill();
+              context.closePath();
+              context.restore();
+          }
+});
+
+
 var canvas = document.getElementById("awesome");
 var context = canvas.getContext("2d");
 
@@ -76,6 +107,39 @@ function makeStarDrawers(numStars) {
     };
 }
 
+function makeNameDrawers() {
+    var stars = [];
+    var i = 0;
+
+    for (i = 0; i < 10; i += 1) {
+        stars[stars.length] = new TwinklingStar({
+            x: Math.random() * 1000,
+            y: Math.random() * 1000,
+            brightness: Math.random() * 3 + 4,
+        });
+    }
+
+    return {
+        draw: function () {
+            function drawStep(step) {
+                var width = window.innerWidth;
+                var height = window.innerHeight;
+                context.clearRect(0, 0, width, height);
+
+                Array.each(stars, function(star) {
+                    star.draw(context, width, height, step);
+                });
+
+                setTimeout(function(){drawStep(step+0.3);}, 50);
+            }
+            drawStep(0);
+      },
+    };
+}
+
+
 drawers = makeStarDrawers(1000);
+nameDrawers = makeNameDrawers();
+setTimeout(nameDrawers['draw'], 1000);
 
 window.addEvent('domready', drawers["bang"]);
