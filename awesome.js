@@ -4,11 +4,15 @@ var Star = new Class({
                     this.x = options.x;
                     this.y = options.y;
                     this.brightness = options.brightness;
+                    this.color = options.color;
                 },
     draw: function(context) {
               context.save();
-              context.fillStyle = "white";
-              context.fillRect(this.x, this.y, this.brightness, this.brightness);
+              context.fillStyle = this.color;
+              context.beginPath();
+              context.arc(this.x, this.y, this.brightness, 0, 2*Math.PI);
+              context.fill();
+              context.closePath();
               context.restore();
           },
 });
@@ -21,14 +25,16 @@ function drawStars() {
     var height = window.innerHeight;
     canvas.width = width;
     canvas.height = height;
-    var i = 0;
+    var i = 0, c = 0;
     var stars = [];
     var star;
     for (i = 0; i < 1000; i += 1) {
+        c = Math.floor(Math.random() * 150);
         star = stars[stars.length] = new Star({
-            x: Math.floor(Math.random() * width),
-            y: Math.floor(Math.random() * height),
-            brightness: Math.floor(Math.random() * 4),
+            x: Math.random() * width,
+            y: Math.random() * height,
+            brightness: Math.random() * Math.random() * 2,
+            color: "#" + (105+c).toString(16) + (180).toString(16) + (255-c).toString(16),
         });
 
         star.draw(context);
