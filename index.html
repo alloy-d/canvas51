@@ -3,12 +3,15 @@
   <head>
     <title>eno nevele nevele</title>
     <style>
-      body { background-color: #000000; margin: 0; overflow: hidden; }
-      canvas { height: 100%; width: 100%; }
+      body { background-color: #000000; margin: 0; /*overflow: hidden;*/ }
+      canvas { height: 100%; position: fixed; top: 0; width: 100%; }
+      #bigbang { z-index: -1; }
+      #twinkling { z-index: 1; }
     </style>
   </head>
   <body>
-    <canvas id="awesome"></canvas>
+    <canvas id="bigbang"></canvas>
+    <canvas id="twinkling"></canvas>
     <script src="mootools.js"></script>
     <script src="awesome.js"></script>
   </body>

@@ -17,7 +17,7 @@ var Star = new Class({
               context.save();
               context.fillStyle = this.color;
               context.beginPath();
-              context.arc(x, y, this.brightness, 0, 2*Math.PI);
+              context.arc(x, y, this.brightness, 0, 2*Math.PI, null);
               context.fill();
               context.closePath();
               context.restore();
@@ -55,29 +55,39 @@ var TwinklingStar = new Class({
 });
 
 
-var canvas = document.getElementById("awesome");
-var context = canvas.getContext("2d");
+var bangCanvas = document.getElementById("bigbang");
+var bangContext = bangCanvas.getContext("2d");
+
+var nameCanvas = document.getElementById("twinkling");
+var nameContext = nameCanvas.getContext("2d");
 
 function makeStarDrawers(numStars) {
     var stars = [];
-    var i = 0, c = 0;
+    var i = 0, c = 0, tmp, color;
     for (i = 0; i < numStars; i += 1) {
-        c = Math.floor(17 + Math.random() * 238);
+        c = Math.floor(Math.random() * 255);
+        color = "#";
+        tmp = c.toString(16);
+        color += ((tmp.length === 1)?"0":"") + tmp;
+        color += "80";
+        tmp = (255-c).toString(16);
+        color += ((tmp.length === 1)?"0":"") + tmp;
+        
         stars[stars.length] = new Star({
             x: Math.random() * 1000,
             y: Math.random() * 1000,
             brightness: Math.random() * Math.random() * 2,
-            color: "#" + (000+c).toString(16) + (128).toString(16) + (255-c).toString(16),
+            color: color,
         });
     }
 
     function drawStatic () {
         var width = window.innerWidth;
         var height = window.innerHeight;
-        canvas.width = width;
-        canvas.height = height;
+        bangCanvas.width = width;
+        bangCanvas.height = height;
 
-        Array.each(stars, function(star){ star.draw(context, width, height); });
+        Array.each(stars, function(star){ star.draw(bangContext, width, height, null); });
     }
 
     return {
@@ -86,14 +96,14 @@ function makeStarDrawers(numStars) {
             function drawStep(step) {
                 var width = window.innerWidth;
                 var height = window.innerHeight;
-                context.clearRect(0, 0, width, height);
                 if (step === 0) {
-                    canvas.width = width;
-                    canvas.height = height;
+                    bangCanvas.width = width;
+                    bangCanvas.height = height;
                 }
+                bangContext.clearRect(0, 0, width, height);
 
                 Array.each(stars, function(star) {
-                    star.draw(context, width, height, step);
+                    star.draw(bangContext, width, height, step);
                 });
 
                 if (step < 100) {
@@ -111,7 +121,7 @@ function makeNameDrawers() {
     var stars = [];
     var i = 0;
 
-    for (i = 0; i < 10; i += 1) {
+    for (i = 0; i < 30; i += 1) {
         stars[stars.length] = new TwinklingStar({
             x: Math.random() * 1000,
             y: Math.random() * 1000,
@@ -124,10 +134,12 @@ function makeNameDrawers() {
             function drawStep(step) {
                 var width = window.innerWidth;
                 var height = window.innerHeight;
-                context.clearRect(0, 0, width, height);
+
+                nameCanvas.width = width;
+                nameCanvas.height = height;
 
                 Array.each(stars, function(star) {
-                    star.draw(context, width, height, step);
+                    star.draw(nameContext, width, height, step);
                 });
 
                 setTimeout(function(){drawStep(step+0.3);}, 50);
@@ -140,6 +152,6 @@ function makeNameDrawers() {
 
 drawers = makeStarDrawers(1000);
 nameDrawers = makeNameDrawers();
-setTimeout(nameDrawers['draw'], 1000);
+setTimeout(nameDrawers['draw'], 1500);
 
 window.addEvent('domready', drawers["bang"]);
