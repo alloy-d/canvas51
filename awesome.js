@@ -118,43 +118,15 @@ function makeStarDrawers(numStars) {
 }
 
 function makeNameDrawers() {
-    var stars = [];
+    var stars = [], locations = [];
     var i = 0;
 
-    var locations = [
-        // H
-        [100, 100],
-        [101, 125],
-        [100, 144],
-        [099, 172],
-        [101, 190],
-        [113, 150],
-        [127, 148],
-        [145, 150],
-        [156, 099],
-        [155, 122],
-        [155, 142],
-        [154, 172],
-        [156, 191],
-
-        // A
-        [175, 190],
-        [180, 170],
-        [189, 143],
-        [196, 120],
-        [204, 103],
-        [212, 122],
-        [219, 140],
-        [223, 152],
-        [228, 170],
-        [234, 188],
-        [194, 158],
-        [204, 160],
-        [215, 159],
-
-        // P
-        // OMG TEDIOUS
-    ];
+    for (i = 0; i < 30; i++) {
+        locations[locations.length] = [
+            Math.random() * 1000,
+            Math.random() * 1000,
+        ];
+    }
 
     stars = locations.map(function (coords) {
         return new TwinklingStar({
