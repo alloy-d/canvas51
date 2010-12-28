@@ -163,9 +163,10 @@ function drawDash() {
         var width = window.innerWidth;
         var height = window.innerHeight;
 
-        var fillColor = "#cc00";
+        var fillColor = "#cc";
         var t = Math.floor(Math.sin(step) * 32.5);
 
+        fillColor += Math.floor(32 + t/3).toString(16);
         fillColor += (180 + t).toString(16);
 
         bangCanvas.width = width;
