@@ -92,7 +92,7 @@ function makeStarDrawers(numStars) {
 
     return {
         draw: drawStatic,
-        bang: function() {
+        bang: function(whenFinished) {
             function drawStep(step) {
                 var width = window.innerWidth;
                 var height = window.innerHeight;
@@ -109,6 +109,7 @@ function makeStarDrawers(numStars) {
                 if (step < 100) {
                     setTimeout(function(){drawStep(step+5);}, 5);
                 } else {
+                    whenFinished();
                     window.addEvent('resize', drawStatic);
                 }
             }
@@ -121,13 +122,48 @@ function makeNameDrawers() {
     var stars = [];
     var i = 0;
 
-    for (i = 0; i < 30; i += 1) {
-        stars[stars.length] = new TwinklingStar({
-            x: Math.random() * 1000,
-            y: Math.random() * 1000,
+    var locations = [
+        // H
+        [100, 100],
+        [101, 125],
+        [100, 144],
+        [099, 172],
+        [101, 190],
+        [113, 150],
+        [127, 148],
+        [145, 150],
+        [156, 099],
+        [155, 122],
+        [155, 142],
+        [154, 172],
+        [156, 191],
+
+        // A
+        [175, 190],
+        [180, 170],
+        [189, 143],
+        [196, 120],
+        [204, 103],
+        [212, 122],
+        [219, 140],
+        [223, 152],
+        [228, 170],
+        [234, 188],
+        [194, 158],
+        [204, 160],
+        [215, 159],
+
+        // P
+        // OMG TEDIOUS
+    ];
+
+    stars = locations.map(function (coords) {
+        return new TwinklingStar({
+            x: coords[0],
+            y: coords[1],
             brightness: Math.random() * 3 + 4,
         });
-    }
+    });
 
     return {
         draw: function () {
