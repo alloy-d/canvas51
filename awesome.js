@@ -61,6 +61,9 @@ var bangContext = bangCanvas.getContext("2d");
 var nameCanvas = document.getElementById("twinkling");
 var nameContext = nameCanvas.getContext("2d");
 
+var horizonCanvas = document.getElementById("horizon");
+var horizonContext = horizonCanvas.getContext("2d");
+
 var bangStarted = false;
 
 function makeStarDrawers(numStars) {
@@ -186,12 +189,32 @@ function drawDash() {
     drawDashStep(0);
 }
 
+function drawHorizon() {
+    var gradient;
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+
+    horizonCanvas.width = width;
+    horizonCanvas.height = height;
+
+    horizonContext.save();
+    gradient = horizonContext.createLinearGradient(0, 0, 0, height);
+    gradient.addColorStop(0.3, "#000000");
+    gradient.addColorStop(0.8, "#000022");
+    gradient.addColorStop(1, "#000044");
+    horizonContext.fillStyle = gradient;
+    horizonContext.fillRect(0, 0, width, height);
+    horizonContext.restore();
+}
+
 
 
 drawers = makeStarDrawers(1000);
 nameDrawers = makeNameDrawers();
 
 
+window.addEvent('load', drawHorizon);
+window.addEvent('resize', drawHorizon);
 window.addEvent('load', drawDash);
 
 window.addEvent('keydown', function (event) {

@@ -5,12 +5,14 @@
     <style>
       body { background-color: #000000; margin: 0; /*overflow: hidden;*/ }
       canvas { height: 100%; position: fixed; top: 0; width: 100%; }
+      #horizon { z-index: -360; }
       #bigbang { z-index: -1; }
       #twinkling { z-index: 1; }
     </style>
     <link rel="stylesheet" href="style.css"></link>
   </head>
   <body>
+    <canvas id="horizon"></canvas>
     <canvas id="bigbang"></canvas>
     <canvas id="twinkling"></canvas>
     <script src="mootools.js"></script>
