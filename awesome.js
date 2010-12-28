@@ -110,7 +110,6 @@ function makeStarDrawers(numStars) {
                     setTimeout(function(){drawStep(step+5);}, 5);
                 } else {
                     whenFinished();
-                    window.addEvent('resize', drawStatic);
                 }
             }
             drawStep(0);
@@ -188,6 +187,10 @@ function makeNameDrawers() {
 
 drawers = makeStarDrawers(1000);
 nameDrawers = makeNameDrawers();
-setTimeout(nameDrawers['draw'], 1500);
 
-window.addEvent('domready', drawers["bang"]);
+window.addEvent('domready', function () {
+    drawers["bang"](function () {
+        nameDrawers['draw']();
+        window.addEvent('resize', drawers['draw']);
+    });
+});
