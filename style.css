@@ -1,0 +1,7 @@
+@font-face {
+    font-family: 'Penshurst';
+    font-style: normal;
+    font-weight: normal;
+    src: url('penshurst.ttf');
+    src: local("Penshurst"), url('penshurst.ttf') format('truetype');
+}
