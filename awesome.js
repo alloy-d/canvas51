@@ -66,7 +66,7 @@ var horizonContext = horizonCanvas.getContext("2d");
 
 var bangStarted = false;
 
-function makeStarDrawers(numStars) {
+function makeStarDrawers(numStars, otherLocations) {
     var stars = [];
     var i = 0, c = 0, tmp, color;
     for (i = 0; i < numStars; i += 1) {
@@ -78,12 +78,22 @@ function makeStarDrawers(numStars) {
         tmp = (255-c).toString(16);
         color += ((tmp.length === 1)?"0":"") + tmp;
         
-        stars[stars.length] = new Star({
-            x: Math.random() * 1000,
-            y: Math.random() * 1000,
-            brightness: Math.random() * Math.random() * 2,
-            color: color,
-        });
+        if (i < otherLocations.length) {
+            tmp = otherLocations[i];
+            stars[stars.length] = new Star({
+                x: tmp[0],
+                y: tmp[1],
+                brightness: 2,
+                color: "#bbbbbb",
+            });
+        } else {
+            stars[stars.length] = new Star({
+                x: Math.random() * 1000,
+                y: Math.random() * 1000,
+                brightness: Math.random() * Math.random() * 2,
+                color: color,
+            });
+        }
     }
 
     function drawStatic () {
@@ -158,6 +168,7 @@ function makeNameDrawers() {
             }
             drawStep(0);
       },
+      locations: locations,
     };
 }
 
@@ -209,8 +220,8 @@ function drawHorizon() {
 
 
 
-drawers = makeStarDrawers(1000);
 nameDrawers = makeNameDrawers();
+drawers = makeStarDrawers(1000, nameDrawers["locations"]);
 
 
 window.addEvent('load', drawHorizon);
