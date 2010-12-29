@@ -28,8 +28,8 @@ var TwinklingStar = new Class({
     }
 });
 
-function makeNameDrawers(id) {
-    var canvas = document.getElementById(id);
+function makeTwinkles(canvasId) {
+    var canvas = document.getElementById(canvasId);
     var context = canvas.getContext("2d");
     var stars = [], locations = [];
     var i = 0;

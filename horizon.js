@@ -1,5 +1,5 @@
-function makeHorizonDrawer(id) {
-    var canvas = document.getElementById(id);
+function makeHorizon(canvasId) {
+    var canvas = document.getElementById(canvasId);
     var context = canvas.getContext("2d");
 
     return {

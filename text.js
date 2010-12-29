@@ -1,5 +1,5 @@
-function drawText(id) {
-    var canvas = document.getElementById(id);
+function makeText(canvasId) {
+    var canvas = document.getElementById(canvasId);
     var context = canvas.getContext("2d");
 
     function drawStep(step) {
@@ -26,6 +26,9 @@ function drawText(id) {
 
         if (!bangStarted) setTimeout(function(){drawStep(step+1);}, 50);
     }
-    drawStep(0);
+
+    return {
+        draw: function () { drawStep(0); },
+    }
 }
 

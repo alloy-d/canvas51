@@ -1,24 +1,21 @@
-var horizonCanvas = document.getElementById("horizon");
-var horizonContext = horizonCanvas.getContext("2d");
-
 var bangStarted = false;
 
-nameDrawers = makeNameDrawers("twinkling");
-drawers = makeStarDrawers("bigbang", 1000, nameDrawers["locations"]);
+twinkles = makeTwinkles("twinkles");
+stars = makeStars("bigbang", 1000, twinkles.locations);
+horizon = makeHorizon("horizon");
+text = makeText("bigbang");
 
-drawHorizon = makeHorizonDrawer("horizon")["draw"];
-
-window.addEvent('load', drawHorizon);
-window.addEvent('resize', drawHorizon);
-window.addEvent('load', function(){drawText("bigbang");});
+window.addEvent('load', horizon.draw);
+window.addEvent('resize', horizon.draw);
+window.addEvent('load', text.draw);
 
 window.addEvent('keydown', function (event) {
     if (bangStarted) return;
     if (event.key === 'x') {
         bangStarted = true;
-        drawers["bang"](function () {
-            nameDrawers['draw']();
-            window.addEvent('resize', drawers['draw']);
+        stars.bang(function () {
+            twinkles.draw();
+            window.addEvent('resize', stars.draw);
         });
     }
 });

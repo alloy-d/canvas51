@@ -24,8 +24,8 @@ var Star = new Class({
     },
 });
 
-function makeStarDrawers(id, numStars, otherLocations) {
-    var canvas = document.getElementById(id);
+function makeStars(canvasId, numStars, otherLocations) {
+    var canvas = document.getElementById(canvasId);
     var context = canvas.getContext("2d");
     var stars = [];
     var i = 0, c = 0, tmp, color;
