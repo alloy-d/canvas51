@@ -24,7 +24,7 @@ var Star = new Class({
           },
 });
 
-function makeStarDrawers(numStars, otherLocations, id) {
+function makeStarDrawers(id, numStars, otherLocations) {
     var canvas = document.getElementById(id);
     var context = canvas.getContext("2d");
     var stars = [];
@@ -38,7 +38,7 @@ function makeStarDrawers(numStars, otherLocations, id) {
         tmp = (255-c).toString(16);
         color += ((tmp.length === 1)?"0":"") + tmp;
 
-        if (i < otherLocations.length) {
+        if (otherLocations && i < otherLocations.length) {
             tmp = otherLocations[i];
             stars[stars.length] = new Star({
                 x: tmp[0],
