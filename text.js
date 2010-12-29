@@ -25,6 +25,7 @@ function makeText(canvasId) {
         context.restore();
 
         if (!bangStarted) setTimeout(function(){drawStep(step+1);}, 50);
+        else context.clearRect(0, 0, width, height);
     }
 
     return {
