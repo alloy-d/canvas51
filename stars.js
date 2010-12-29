@@ -56,17 +56,17 @@ function makeStars(canvasId, numStars, otherLocations) {
         }
     }
 
-    function drawStatic () {
-        var width = window.innerWidth;
-        var height = window.innerHeight;
-        canvas.width = width;
-        canvas.height = height;
-
-        Array.each(stars, function(star){ star.draw(context, width, height, null); });
-    }
-
     return {
-        draw: drawStatic,
+        draw: function () {
+            var width = window.innerWidth;
+            var height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+
+            Array.each(stars, function (star) {
+                star.draw(context, width, height);
+            });
+        },
         bang: function(whenFinished) {
             function drawStep(step) {
                 var width = window.innerWidth;
