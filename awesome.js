@@ -1,9 +1,9 @@
 var bangStarted = false;
 
 twinkles = makeTwinkles("twinkles");
-stars = makeStars("bigbang", 1000, twinkles.locations);
+stars = makeStars("littlebang", 1000, twinkles.locations);
 horizon = makeHorizon("horizon");
-text = makeText("bigbang");
+text = makeText("littlebang");
 
 window.addEvent('load', horizon.draw);
 window.addEvent('resize', horizon.draw);
