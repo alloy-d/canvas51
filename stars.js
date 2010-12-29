@@ -1,27 +1,27 @@
 var Star = new Class({
     initialize: function(options) {
-                    this.options = options;
-                    this.x = options.x;
-                    this.y = options.y;
-                    this.brightness = options.brightness || 1;
-                    this.color = options.color || "white";
-                },
+        this.options = options;
+        this.x = options.x;
+        this.y = options.y;
+        this.brightness = options.brightness || 1;
+        this.color = options.color || "white";
+    },
     draw: function(context, width, height, step) {
-              var x = this.x * width / 1000;
-              var y = this.y * height / 1000;
-              if (typeof(step) === 'number') {
-                  x = width / 2 + (step / 100) * (x - width / 2);
-                  y = height / 2 + (step / 100) * (y - height / 2);
-              }
+        var x = this.x * width / 1000;
+        var y = this.y * height / 1000;
+        if (typeof(step) === 'number') {
+            x = width / 2 + (step / 100) * (x - width / 2);
+            y = height / 2 + (step / 100) * (y - height / 2);
+        }
 
-              context.save();
-              context.fillStyle = this.color;
-              context.beginPath();
-              context.arc(x, y, this.brightness, 0, 2*Math.PI, null);
-              context.fill();
-              context.closePath();
-              context.restore();
-          },
+        context.save();
+        context.fillStyle = this.color;
+        context.beginPath();
+        context.arc(x, y, this.brightness, 0, 2*Math.PI, null);
+        context.fill();
+        context.closePath();
+        context.restore();
+    },
 });
 
 function makeStarDrawers(id, numStars, otherLocations) {
