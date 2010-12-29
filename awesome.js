@@ -181,7 +181,7 @@ function drawDash() {
         bangContext.font = "48px Penshurst";
         t = bangContext.measureText("DASH (X)!!!").width;
 
-        bangContext.fillText("DASH (X)!!!", (width - t) / 2, height * 0.7);
+        bangContext.fillText("DASH (X)!!!", (width - t) / 2, height * 0.8);
         bangContext.restore();
 
         if (!bangStarted) setTimeout(function(){drawDashStep(step+1);}, 50);
