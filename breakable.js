@@ -55,7 +55,7 @@ function makeBreakable(canvasId, centerX, centerY, radius) {
             });
 
             context.save();
-            context.strokeStyle = "#8888aa";
+            context.strokeStyle = "#70708f";
 
             for (i = 0; i < 5; i++) {
                 ai = (i + 4) % 5; // anticlockwise index
