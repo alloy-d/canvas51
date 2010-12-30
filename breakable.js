@@ -1,6 +1,23 @@
 function makeBreakable(canvasId, centerX, centerY, radius) {
     var canvas = document.getElementById(canvasId);
     var context = canvas.getContext("2d");
+    var i = 0;
+
+    var spikes = [], midpoints = [];
+    for (i = 0; i < 5; i += 1) {
+        spikes[i] = {
+            r: radius,
+            theta: 2 * i * Math.PI / 5 - Math.PI / 2
+        };
+    }
+
+    midpoints = [
+        {r: 0.55 * radius, theta: -3 * Math.PI / 10},
+        {r: 0.60 * radius, theta: Math.PI / 10},
+        {r: 0.60 * radius, theta: 5 * Math.PI / 10},
+        {r: 0.60 * radius, theta: 9 * Math.PI / 10},
+        {r: 0.55 * radius, theta: 13 * Math.PI / 10}
+    ];
 
     return {
         draw: function () {
@@ -9,44 +26,45 @@ function makeBreakable(canvasId, centerX, centerY, radius) {
 
             var canvasCenterX = width * (centerX / 1000);
             var canvasCenterY = height * (centerY / 1000);
-            var canvasRadius = width * (radius / 1000);
+            var canvasRadius = height * (radius / 1000);
 
-            var polarPoints = [], points = [];
+            var cSpikes, cMidpoints;
             var i = 0;
 
             var map = function (r, theta) {
-                return mapToCenter(r, theta, canvasCenterX, canvasCenterY);
+                var cr = height * (r / 1000);
+                return mapToCenter(cr, theta, canvasCenterX, canvasCenterY);
             }
 
             canvas.width = width;
             canvas.height = height;
 
-            for (i = 0; i < 5; i += 1) {
-                polarPoints[2*i] = {
-                    r: canvasRadius,
-                    theta: 2 * i * Math.PI / 5 - Math.PI / 2
-                };
-                polarPoints[2*i+1] = {
-                    r: canvasRadius * 0.5,
-                    theta: 2 * i * Math.PI / 5 - Math.PI * 3 / 10
-                };
-            }
-
-            points = Array.map(polarPoints, function (point) {
+            cSpikes = Array.map(spikes, function (point) {
+                return map(point.r, point.theta);
+            });
+            cMidpoints = Array.map(midpoints, function (point) {
                 return map(point.r, point.theta);
             });
 
             context.save();
-            context.moveTo(canvasCenterX, canvasCenterY);
             context.strokeStyle = "white";
 
-            context.beginPath();
-            Array.each(points, function (point) {
-                context.lineTo(point.x, point.y);
-            });
-            context.lineTo(points[0].x, points[0].y);
-            context.stroke();
-            context.closePath();
+            for (i = 0; i < 5; i++) {
+                context.beginPath();
+                context.moveTo(canvasCenterX, canvasCenterY);
+                context.lineTo(cSpikes[i].x, cSpikes[i].y);
+                context.lineTo(cMidpoints[i].x, cMidpoints[i].y);
+                context.lineTo(canvasCenterX, canvasCenterY);
+                context.stroke();
+                context.closePath();
+
+                context.beginPath();
+                context.moveTo(canvasCenterX, canvasCenterY);
+                context.lineTo(cSpikes[i].x, cSpikes[i].y);
+                context.lineTo(cMidpoints[(i+4) % 5].x, cMidpoints[(i+4) % 5].y);
+                context.stroke();
+                context.closePath();
+            }
             context.restore();
         },
     };
