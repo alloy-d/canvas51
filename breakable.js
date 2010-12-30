@@ -3,7 +3,7 @@ function makeBreakable(canvasId, centerX, centerY, radius) {
     var context = canvas.getContext("2d");
     var i = 0;
 
-    var spikes = [], midpoints = [];
+    var spikes = [], midpoints = [], faceFills = [];
     for (i = 0; i < 5; i += 1) {
         spikes[i] = {
             r: radius,
@@ -19,6 +19,14 @@ function makeBreakable(canvasId, centerX, centerY, radius) {
         {r: 0.55 * radius, theta: 13 * Math.PI / 10}
     ];
 
+    faceFills = [
+        {a: "#99aacc", c: "#bbccee"},
+        {a: "#bbccee", c: "#9988af"},
+        {a: "#99aacc", c: "#9988af"},
+        {a: "#9988af", c: "#99aacc"},
+        {a: "#9988af", c: "#99aacc"}
+    ];
+
     return {
         draw: function () {
             var width = window.innerWidth;
@@ -29,7 +37,7 @@ function makeBreakable(canvasId, centerX, centerY, radius) {
             var canvasRadius = height * (radius / 1000);
 
             var cSpikes, cMidpoints;
-            var i = 0;
+            var i = 0, ai = 0;
 
             var map = function (r, theta) {
                 var cr = height * (r / 1000);
@@ -47,21 +55,29 @@ function makeBreakable(canvasId, centerX, centerY, radius) {
             });
 
             context.save();
-            context.strokeStyle = "white";
+            context.strokeStyle = "#8888aa";
 
             for (i = 0; i < 5; i++) {
+                ai = (i + 4) % 5; // anticlockwise index
+
+                // draw face in clockwise direction
                 context.beginPath();
                 context.moveTo(canvasCenterX, canvasCenterY);
                 context.lineTo(cSpikes[i].x, cSpikes[i].y);
                 context.lineTo(cMidpoints[i].x, cMidpoints[i].y);
                 context.lineTo(canvasCenterX, canvasCenterY);
+                context.fillStyle = faceFills[i]["c"];
+                context.fill();
                 context.stroke();
                 context.closePath();
 
+                // draw face in anticlockwise direction
                 context.beginPath();
                 context.moveTo(canvasCenterX, canvasCenterY);
                 context.lineTo(cSpikes[i].x, cSpikes[i].y);
                 context.lineTo(cMidpoints[(i+4) % 5].x, cMidpoints[(i+4) % 5].y);
+                context.fillStyle = faceFills[i]["a"];
+                context.fill();
                 context.stroke();
                 context.closePath();
             }
