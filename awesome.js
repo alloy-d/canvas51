@@ -9,8 +9,16 @@ ground = makeGround("ground");
 
 window.addEvent('load', horizon.draw);
 window.addEvent('load', ground.draw);
-window.addEvent('load', breakable.draw);
-window.addEvent('load', text.draw);
+window.addEvent('load', function () {
+    setTimeout(function() {
+        breakable.show();
+        sound = document.getElementById("star");
+        sound.play();
+    }, 200);
+    setTimeout(function() {
+        text.draw();
+    }, 500);
+});
 
 window.addEvent('resize', horizon.draw);
 window.addEvent('resize', ground.draw);
