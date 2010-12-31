@@ -5,14 +5,21 @@ var Star = new Class({
         this.y = options.y;
         this.brightness = options.brightness || 1;
         this.color = options.color || "white";
+
+        this.pos = {
+            x: 500,
+            y: 500
+        };
+
+        this.speed = Math.random() / 10;
+        if (this.speed < 0.05) this.speed += 0.03;
+
+        this.dx = (this.x - this.pos.x) * this.speed;
+        this.dy = (this.y - this.pos.y) * this.speed;
     },
-    draw: function(context, width, height, step) {
-        var x = this.x * width / 1000;
-        var y = this.y * height / 1000;
-        if (typeof(step) === 'number') {
-            x = width / 2 + (step / 100) * (x - width / 2);
-            y = height / 2 + (step / 100) * (y - height / 2);
-        }
+    draw: function () {
+        var x = cx(this.pos.x);
+        var y = cy(this.pos.y);
 
         context.save();
         context.fillStyle = this.color;
@@ -21,7 +28,20 @@ var Star = new Class({
         context.fill();
         context.closePath();
         context.restore();
+        this.update();
     },
+    update: function () {
+        if (!(this.pos.x <= this.x && this.dx < 0) 
+            && !(this.pos.x >= this.x && this.dx > 0)) {
+                this.pos.x += this.dx;
+                this.dx *= 0.95;
+            }
+        if (!(this.pos.y <= this.y && this.dy < 0)
+            && !(this.pos.y >= this.y && this.dy > 0)) {
+                this.pos.y += this.dy;
+                this.dy *= 0.95;
+            }
+    }
 });
 
 function makeStars(numStars, otherLocations) {

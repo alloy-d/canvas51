@@ -6,13 +6,11 @@ var TwinklingStar = new Class({
         this.color = "#eeeeee";
         this.stepSeed = Math.random() * Math.PI;
     },
-    draw: function(context, step) {
-        var x = this.x * WIDTH / 1000;
-        var y = this.y * HEIGHT / 1000;
+    draw: function() {
+        var x = cx(this.pos.x);
+        var y = cy(this.pos.y);
         var brightness = this.brightness;
-        if (typeof(step) === 'number') {
-            brightness += Math.sin(step + this.stepSeed);
-        }
+        brightness += Math.sin(FRAME * 0.3 + this.stepSeed);
 
         context.save();
         context.fillStyle = this.color;
@@ -25,7 +23,8 @@ var TwinklingStar = new Class({
         context.fill();
         context.closePath();
         context.restore();
-    }
+        this.update();
+    },
 });
 
 function makeTwinkles() {
@@ -49,14 +48,9 @@ function makeTwinkles() {
 
     return {
         draw: function () {
-            function drawStep(step) {
-                Array.each(stars, function(star) {
-                    star.draw(context, step);
-                });
-
-                setTimeout(function(){drawStep(step+0.3);}, 50);
-            }
-            drawStep(0);
+            Array.each(stars, function(star) {
+                star.draw();
+            });
         },
         locations: locations,
     };
