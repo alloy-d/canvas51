@@ -24,9 +24,9 @@ var clearCanvas = function () {
 }
 
 var horizon = makeHorizon();
-var star = makeBreakable(500, 500, 100);
+var star = makeStar(500, 500, 100);
 var platform = makePlatform();
-var starField = makeStars(1000);
+var starField = makeStarField(1000);
 var twinkles = makeTwinkles();
 var text = makeText();
 

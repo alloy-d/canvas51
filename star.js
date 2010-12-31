@@ -1,4 +1,4 @@
-function makeBreakable(centerX, centerY, radius) {
+function makeStar(centerX, centerY, radius) {
     var i = 0;
 
     var spikes = [], midpoints = [], faceFills = [];

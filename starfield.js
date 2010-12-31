@@ -44,7 +44,7 @@ var Star = new Class({
     }
 });
 
-function makeStars(numStars, otherLocations) {
+function makeStarField(numStars, otherLocations) {
     var stars = [];
     var i = 0, c = 0, tmp, color;
     for (i = 0; i < numStars; i += 1) {
