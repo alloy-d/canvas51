@@ -1,5 +1,5 @@
 function makeText() {
-    var size = 48
+    var size = 48;
 
     function drawStep(step) {
         var fillColor = "#cc";
