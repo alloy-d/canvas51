@@ -28,6 +28,7 @@ var drawStar = makeBreakable(500, 500, 100).draw;
 var drawPlatform = makePlatform().draw;
 var drawStarField = makeStars(1000).draw;
 var drawTwinkles = makeTwinkles().draw;
+var drawText = makeText().draw;
 
 var drawFrame = function () {
     clearCanvas();
@@ -37,6 +38,7 @@ var drawFrame = function () {
     drawPlatform();
     drawStarField();
     drawTwinkles();
+    drawText();
 }
 
 window.addEvent('load', function () {

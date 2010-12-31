@@ -18,9 +18,9 @@ function makeText() {
         context.fillText("DASH (X) ! ! !", (WIDTH - t) / 2, HEIGHT * 0.8);
         context.restore();
 
-        if (!bangStarted) {
+        if (!dashStarted) {
             setTimeout(function(){drawStep(step+1);}, 50);
-        } else if (bangStarted && size > 30) {
+        } else if (dashStarted && size > 30) {
             size -= 1;
             setTimeout(function(){drawStep(step+1);}, 5);
         }
