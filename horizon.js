@@ -2,7 +2,7 @@ function makeHorizon() {
     var gradient;
 
     return {
-        prepare: function () {
+        resize: function () {
             gradient = context.createLinearGradient(0, 0, 0, HEIGHT);
             gradient.addColorStop(0.3, "#000000");
             gradient.addColorStop(0.8, "#000022");

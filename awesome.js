@@ -47,20 +47,19 @@ var drawFrame = function () {
     FRAME += 1;
 }
 
-setInterval(drawFrame, 30);
 
 window.addEvent('load', function () {
     resizeCanvas();
-    horizon.prepare();
+    horizon.resize();
+    star.resize();
+    drawFrame();
+    setInterval(drawFrame, 30);
 });
 
 window.addEvent('resize', function () {
     resizeCanvas();
-    horizon.prepare();
-    drawFrame();
-});
-
-window.addEvent('load', function () {
+    horizon.resize();
+    star.resize();
     drawFrame();
 });
 
