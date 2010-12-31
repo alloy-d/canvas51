@@ -77,22 +77,8 @@ function makeStars(numStars, otherLocations) {
     return {
         draw: function () {
             Array.each(stars, function (star) {
-                star.draw(context, WIDTH, HEIGHT);
+                star.draw();
             });
-        },
-        bang: function(whenFinished) {
-            function drawStep(step) {
-                Array.each(stars, function(star) {
-                    star.draw(context, WIDTH, HEIGHT, step);
-                });
-
-                if (step < 100) {
-                    setTimeout(function(){drawStep(step+5);}, 5);
-                } else {
-                    whenFinished();
-                }
-            }
-            drawStep(0);
         },
     };
 }

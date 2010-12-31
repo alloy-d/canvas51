@@ -25,74 +25,57 @@ function makeBreakable(centerX, centerY, radius) {
         {a: "#9988af", c: "#99aacc"}
     ];
 
-    function draw() {
-        var canvasCenterX = WIDTH * (centerX / 1000);
-        var canvasCenterY = HEIGHT * (centerY / 1000);
-        var canvasRadius = HEIGHT * (radius / 1000);
-
-        var cSpikes, cMidpoints;
-        var i = 0, ai = 0;
-
-        var map = function (r, theta) {
-            var cr = HEIGHT * (r / 1000);
-            return rect(cr, theta, canvasCenterX, canvasCenterY);
-        }
-
-        cSpikes = Array.map(spikes, function (point) {
-            return map(point.r, point.theta);
-        });
-        cMidpoints = Array.map(midpoints, function (point) {
-            return map(point.r, point.theta);
-        });
-
-        context.save();
-        context.strokeStyle = "#70708f";
-        context.lineWidth = 1;
-
-        for (i = 0; i < 5; i += 1) {
-            ai = (i + 4) % 5; // anticlockwise index
-
-            // draw face in clockwise direction
-            context.beginPath();
-            context.moveTo(canvasCenterX, canvasCenterY);
-            context.lineTo(cSpikes[i].x, cSpikes[i].y);
-            context.lineTo(cMidpoints[i].x, cMidpoints[i].y);
-            context.lineTo(canvasCenterX, canvasCenterY);
-            context.fillStyle = faceFills[i]["c"];
-            context.fill();
-            context.stroke();
-            context.closePath();
-
-            // draw face in anticlockwise direction
-            context.beginPath();
-            context.moveTo(canvasCenterX, canvasCenterY);
-            context.lineTo(cSpikes[i].x, cSpikes[i].y);
-            context.lineTo(cMidpoints[ai].x, cMidpoints[ai].y);
-            context.fillStyle = faceFills[i]["a"];
-            context.fill();
-            context.stroke();
-            context.closePath();
-        }
-        context.restore();
-    }
 
     return {
-        draw: draw,
-        show: function () {
-            function drawStep(step) {
-                draw();
-                context.save();
-                context.strokeStyle = "#774477";
-                context.strokeWidth = 1;
+        draw: function () {
+            var canvasCenterX = cx(centerX);
+            var canvasCenterY = cy(centerY);
+            var canvasRadius = cy(radius);
+
+            var cSpikes, cMidpoints;
+            var i = 0, ai = 0;
+
+            var map = function (r, theta) {
+                var cr = cy(r);
+                return rect(cr, theta, canvasCenterX, canvasCenterY);
+            }
+
+            cSpikes = Array.map(spikes, function (point) {
+                return map(point.r, point.theta);
+            });
+            cMidpoints = Array.map(midpoints, function (point) {
+                return map(point.r, point.theta);
+            });
+
+            context.save();
+            context.strokeStyle = "#70708f";
+            context.lineWidth = 1;
+
+            for (i = 0; i < 5; i += 1) {
+                ai = (i + 4) % 5; // anticlockwise index
+
+                // draw face in clockwise direction
                 context.beginPath();
-                context.arc(CENTER.x, CENTER.y, step*2+10, 0, Math.PI*2, null);
+                context.moveTo(canvasCenterX, canvasCenterY);
+                context.lineTo(cSpikes[i].x, cSpikes[i].y);
+                context.lineTo(cMidpoints[i].x, cMidpoints[i].y);
+                context.lineTo(canvasCenterX, canvasCenterY);
+                context.fillStyle = faceFills[i]["c"];
+                context.fill();
                 context.stroke();
                 context.closePath();
-                context.restore();
 
-                if (step < 50) setTimeout(function(){drawStep(step+5)}, 10);
+                // draw face in anticlockwise direction
+                context.beginPath();
+                context.moveTo(canvasCenterX, canvasCenterY);
+                context.lineTo(cSpikes[i].x, cSpikes[i].y);
+                context.lineTo(cMidpoints[ai].x, cMidpoints[ai].y);
+                context.fillStyle = faceFills[i]["a"];
+                context.fill();
+                context.stroke();
+                context.closePath();
             }
-            drawStep(0);
+            context.restore();
         },
     };
 }
