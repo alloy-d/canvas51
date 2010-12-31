@@ -24,9 +24,7 @@ var Star = new Class({
     },
 });
 
-function makeStars(canvasId, numStars, otherLocations) {
-    var canvas = document.getElementById(canvasId);
-    var context = canvas.getContext("2d");
+function makeStars(numStars, otherLocations) {
     var stars = [];
     var i = 0, c = 0, tmp, color;
     for (i = 0; i < numStars; i += 1) {
@@ -58,27 +56,14 @@ function makeStars(canvasId, numStars, otherLocations) {
 
     return {
         draw: function () {
-            var width = window.innerWidth;
-            var height = window.innerHeight;
-            canvas.width = width;
-            canvas.height = height;
-
             Array.each(stars, function (star) {
-                star.draw(context, width, height);
+                star.draw(context, WIDTH, HEIGHT);
             });
         },
         bang: function(whenFinished) {
             function drawStep(step) {
-                var width = window.innerWidth;
-                var height = window.innerHeight;
-                if (step === 0) {
-                    canvas.width = width;
-                    canvas.height = height;
-                }
-                context.clearRect(0, 0, width, height);
-
                 Array.each(stars, function(star) {
-                    star.draw(context, width, height, step);
+                    star.draw(context, WIDTH, HEIGHT, step);
                 });
 
                 if (step < 100) {

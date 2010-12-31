@@ -1,21 +1,12 @@
-function makeText(canvasId) {
-    var canvas = document.getElementById(canvasId);
-    var context = canvas.getContext("2d");
-
+function makeText() {
     var size = 48
 
     function drawStep(step) {
-        var width = window.innerWidth;
-        var height = window.innerHeight;
-
         var fillColor = "#cc";
         var t = Math.floor(Math.sin(step) * 32.5);
 
         fillColor += Math.floor(32 + t/3).toString(16);
         fillColor += (180 + t).toString(16);
-
-        canvas.width = width;
-        canvas.height = height;
 
         context.save();
         context.fillStyle = fillColor;
@@ -24,7 +15,7 @@ function makeText(canvasId) {
         context.font = +(size) + "px Penshurst";
         t = context.measureText("DASH (X) ! ! !").width;
 
-        context.fillText("DASH (X) ! ! !", (width - t) / 2, height * 0.8);
+        context.fillText("DASH (X) ! ! !", (WIDTH - t) / 2, HEIGHT * 0.8);
         context.restore();
 
         if (!bangStarted) {
@@ -32,8 +23,6 @@ function makeText(canvasId) {
         } else if (bangStarted && size > 30) {
             size -= 1;
             setTimeout(function(){drawStep(step+1);}, 5);
-        } else {
-            context.clearRect(0, 0, width, height);
         }
     }
 

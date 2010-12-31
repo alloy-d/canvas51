@@ -1,6 +1,4 @@
-function makeBreakable(canvasId, centerX, centerY, radius) {
-    var canvas = document.getElementById(canvasId);
-    var context = canvas.getContext("2d");
+function makeBreakable(centerX, centerY, radius) {
     var i = 0;
 
     var spikes = [], midpoints = [], faceFills = [];
@@ -28,23 +26,17 @@ function makeBreakable(canvasId, centerX, centerY, radius) {
     ];
 
     function draw() {
-        var width = window.innerWidth;
-        var height = window.innerHeight;
-
-        var canvasCenterX = width * (centerX / 1000);
-        var canvasCenterY = height * (centerY / 1000);
-        var canvasRadius = height * (radius / 1000);
+        var canvasCenterX = WIDTH * (centerX / 1000);
+        var canvasCenterY = HEIGHT * (centerY / 1000);
+        var canvasRadius = HEIGHT * (radius / 1000);
 
         var cSpikes, cMidpoints;
         var i = 0, ai = 0;
 
         var map = function (r, theta) {
-            var cr = height * (r / 1000);
-            return mapToCenter(cr, theta, canvasCenterX, canvasCenterY);
+            var cr = HEIGHT * (r / 1000);
+            return rect(cr, theta, canvasCenterX, canvasCenterY);
         }
-
-        canvas.width = width;
-        canvas.height = height;
 
         cSpikes = Array.map(spikes, function (point) {
             return map(point.r, point.theta);
@@ -57,7 +49,7 @@ function makeBreakable(canvasId, centerX, centerY, radius) {
         context.strokeStyle = "#70708f";
         context.lineWidth = 1;
 
-        for (i = 0; i < 5; i++) {
+        for (i = 0; i < 5; i += 1) {
             ai = (i + 4) % 5; // anticlockwise index
 
             // draw face in clockwise direction
@@ -75,7 +67,7 @@ function makeBreakable(canvasId, centerX, centerY, radius) {
             context.beginPath();
             context.moveTo(canvasCenterX, canvasCenterY);
             context.lineTo(cSpikes[i].x, cSpikes[i].y);
-            context.lineTo(cMidpoints[(i+4) % 5].x, cMidpoints[(i+4) % 5].y);
+            context.lineTo(cMidpoints[ai].x, cMidpoints[ai].y);
             context.fillStyle = faceFills[i]["a"];
             context.fill();
             context.stroke();
@@ -88,15 +80,12 @@ function makeBreakable(canvasId, centerX, centerY, radius) {
         draw: draw,
         show: function () {
             function drawStep(step) {
-                var width = window.innerWidth;
-                var height = window.innerHeight;
-
                 draw();
                 context.save();
                 context.strokeStyle = "#774477";
                 context.strokeWidth = 1;
                 context.beginPath();
-                context.arc(width/2, height/2, step*2+10, 0, Math.PI*2, null);
+                context.arc(CENTER.x, CENTER.y, step*2+10, 0, Math.PI*2, null);
                 context.stroke();
                 context.closePath();
                 context.restore();

@@ -1,33 +1,61 @@
-var bangStarted = false;
+var canvas = document.getElementById("awesome");
+var context = canvas.getContext("2d");
 
-twinkles = makeTwinkles("twinkles");
-stars = makeStars("littlebang", 1000, twinkles.locations);
-horizon = makeHorizon("horizon");
-text = makeText("text");
-breakable = makeBreakable("littlebang", 500, 500, 100);
-ground = makeGround("ground");
+var dashStarted = false, starBroken = false;
 
-window.addEvent('load', horizon.draw);
-window.addEvent('load', ground.draw);
+var WIDTH, HEIGHT, CENTER;
+var FRAME;
+
+var resizeCanvas = function () {
+    WIDTH = window.innerWidth;
+    HEIGHT = window.innerHeight;
+
+    CENTER = {
+        x: WIDTH / 2,
+        y: HEIGHT / 2
+    };
+
+    canvas.width = WIDTH;
+    canvas.height = HEIGHT;
+}
+
+var clearCanvas = function () {
+    context.clearRect(0, 0, WIDTH, HEIGHT);
+}
+
+var drawHorizon = makeHorizon().draw;
+var drawStar = makeBreakable(500, 500, 100).draw;
+var drawPlatform = makePlatform().draw;
+var drawStarField = makeStars(1000).draw;
+var drawTwinkles = makeTwinkles().draw;
+
+var drawFrame = function () {
+    clearCanvas();
+
+    drawHorizon();
+    drawStar();
+    drawPlatform();
+    drawStarField();
+    drawTwinkles();
+}
+
 window.addEvent('load', function () {
-    setTimeout(function() {
-        breakable.show();
-        sound = document.getElementById("star");
-        sound.play();
-    }, 200);
-    setTimeout(function() {
-        text.draw();
-    }, 500);
+    resizeCanvas();
 });
 
-window.addEvent('resize', horizon.draw);
-window.addEvent('resize', ground.draw);
-window.addEvent('resize', breakable.draw);
+window.addEvent('resize', function () {
+    resizeCanvas();
+    drawFrame();
+});
+
+window.addEvent('load', function () {
+    drawFrame();
+});
 
 window.addEvent('keydown', function (event) {
-    if (bangStarted) return;
+    if (dashStarted) return;
     if (event.key === 'x') {
-        bangStarted = true;
+        dashStarted = true;
         stars.bang(function () {
             twinkles.draw();
             window.addEvent('resize', stars.draw);
