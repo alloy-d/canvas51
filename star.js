@@ -48,6 +48,8 @@ function makeStar(centerX, centerY, radius) {
         draw: function () {
             var i = 0, ai = 0;
 
+            if (starBroken) return;
+
             context.save();
             context.strokeStyle = "#70708f";
             context.lineWidth = 1;
