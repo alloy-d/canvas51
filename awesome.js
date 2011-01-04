@@ -29,6 +29,7 @@ var platform = makePlatform();
 var starField = makeStarField(1000);
 var twinkles = makeTwinkles();
 var text = makeText();
+var unicorn = makeUnicorn();
 
 var drawFrame = function () {
     clearCanvas();
@@ -36,6 +37,10 @@ var drawFrame = function () {
     horizon.draw();
     star.draw();
     platform.draw();
+
+    if (dashStarted) {
+        unicorn.draw();
+    }
 
     if (starBroken) {
         starField.draw();
@@ -67,7 +72,7 @@ window.addEvent('keydown', function (event) {
     if (dashStarted) return;
     if (event.key === 'x') {
         dashStarted = true;
-        starBroken = true;
+        //starBroken = true;
     }
 });
 
