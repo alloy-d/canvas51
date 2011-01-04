@@ -114,6 +114,7 @@ function makeUnicorn() {
 
             context.restore();
             step += 1;
+            if (pos.x > 400) starBroken = true;
             pos.x += dx;
         },
     };
