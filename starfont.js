@@ -11,8 +11,8 @@ function makeFont(width, height, sparsity) {
                     }
                 },
                 function (x) {
-                    if (x > width/4 && x < 3*width/4 && !(x % 2))
-                        return height/2;
+                    if (x > width/4 && x < 3*width/4 && (x % 2))
+                        return 2*height/3;
                 }
             ];
             var points = [];
