@@ -86,7 +86,7 @@ function makeUnicorn() {
                     if (p > 1) p = 1;
                     o = offset[color];
 
-                    context.globalAlpha = p;
+                    context.globalAlpha = p * p * p;
 
                     ep = endpoint(color);
                     er = rect(ep.r, ep.theta);
