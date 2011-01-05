@@ -23,11 +23,14 @@ var clearCanvas = function () {
     context.clearRect(0, 0, WIDTH, HEIGHT);
 }
 
+var font = makeFont(80, 150, 5);
+var locations = font.a(20, 20);
+
 var horizon = makeHorizon();
 var star = makeStar(500, 500, 100);
 var platform = makePlatform();
 var starField = makeStarField(1000);
-var twinkles = makeTwinkles();
+var twinkles = makeTwinkles(locations);
 var text = makeText();
 var unicorn = makeUnicorn();
 

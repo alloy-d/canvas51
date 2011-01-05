@@ -27,16 +27,9 @@ var TwinklingStar = new Class({
     },
 });
 
-function makeTwinkles() {
-    var stars = [], locations = [];
+function makeTwinkles(locations) {
+    var stars = [];
     var i = 0;
-
-    for (i = 0; i < 30; i++) {
-        locations[locations.length] = [
-            Math.random() * 1000,
-            Math.random() * 1000,
-        ];
-    }
 
     stars = locations.map(function (coords) {
         return new TwinklingStar({
