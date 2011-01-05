@@ -24,7 +24,7 @@ var clearCanvas = function () {
 }
 
 var font = makeFont(80, 150, 5);
-var locations = font.a(20, 20);
+var locations = font.A(20, 20);
 
 var horizon = makeHorizon();
 var star = makeStar(500, 500, 100);

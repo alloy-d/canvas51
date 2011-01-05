@@ -1,6 +1,6 @@
 function makeFont(width, height, sparsity) {
     return {
-        a: function (x, y) {
+        A: function (x, y) {
             var cx = 0, i = 0, cy = 0;
             var f = [
                 function (x) {
@@ -27,17 +27,17 @@ function makeFont(width, height, sparsity) {
 
             return points;
         },
-        b: undefined,
-        d: undefined,
-        e: undefined,
-        h: undefined,
-        i: undefined,
-        o: undefined,
-        p: undefined,
-        r: undefined,
-        s: undefined,
-        t: undefined,
-        y: undefined,
+        B: undefined,
+        D: undefined,
+        E: undefined,
+        H: undefined,
+        I: undefined,
+        O: undefined,
+        P: undefined,
+        R: undefined,
+        S: undefined,
+        T: undefined,
+        Y: undefined,
         comma: undefined,
         space: function (x, y) { return []; },
     };
