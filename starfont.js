@@ -173,7 +173,23 @@ function makeFont(width, height) {
         },
         S: function (x, y) {
             return [
-                // TODO CURVES ARE HARD
+                [25, 0],
+                [50, 0],
+                [75, 0],
+                [95, 10],
+                [5, 10],
+                [0, 25],
+                [5, 40],
+                [25, 50],
+                [50, 50],
+                [75, 50],
+                [95, 60],
+                [100, 75],
+                [95, 90],
+                [25, 100],
+                [50, 100],
+                [75, 100],
+                [5, 90],
             ].map(translate(x, y));
         },
         T: function (x, y) {
