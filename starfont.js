@@ -134,6 +134,5 @@ function makeFont(width, height) {
             return [
             ].map(translate(x, y));
         },
-        space: function (x, y) { return []; },
     };
 }
