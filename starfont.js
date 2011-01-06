@@ -75,12 +75,39 @@ function makeFont(width, height) {
                 [100, 100],
             ].map(translate(x, y));
         },
-        I: function (x, y) { return []; },
+        I: function (x, y) {
+            return [
+                [25, 0],
+                [50, 0],
+                [75, 0],
+                [50, 20],
+                [50, 40],
+                [50, 60],
+                [50, 80],
+                [50, 100],
+                [25, 100],
+                [50, 100],
+                [75, 100],
+            ].map(translate(x, y));
+        },
         O: function (x, y) { return []; },
         P: function (x, y) { return []; },
         R: function (x, y) { return []; },
         S: function (x, y) { return []; },
-        T: function (x, y) { return []; },
+        T: function (x, y) {
+            return [
+                [0, 0],
+                [25, 0],
+                [50, 0],
+                [75, 0],
+                [100, 0],
+                [50, 20],
+                [50, 40],
+                [50, 60],
+                [50, 80],
+                [50, 100],
+            ].map(translate(x, y));
+        },
         Y: function (x, y) { return []; },
         comma: function (x, y) { return []; },
         space: function (x, y) { return []; },
