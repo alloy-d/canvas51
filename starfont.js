@@ -14,7 +14,24 @@ function makeFont(width, height) {
     };
 
     return {
-        A: function (x, y) { return []; },
+        A: function (x, y) {
+            return [
+                [0, 100],
+                [10, 80],
+                [20, 60],
+                [30, 40],
+                [40, 20],
+                [50, 0],
+                [60, 20],
+                [70, 40],
+                [80, 60],
+                [90, 80],
+                [100, 100],
+                [30, 70],
+                [50, 70],
+                [70, 70],
+            ].map(translate(x, y));
+        },
         B: function (x, y) { return []; },
         D: function (x, y) { return []; },
         E: function (x, y) { return []; },
