@@ -204,6 +204,11 @@ function makeFont(width, height) {
         },
         comma: function (x, y) {
             return [
+                [0, 107],
+                [2, 90],
+                [12, 94],
+                [7, 99],
+                [9, 87],
             ].map(translate(x, y));
         },
     };
