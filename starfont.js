@@ -59,6 +59,13 @@ function makeFont(width, height) {
         },
         D: function (x, y) {
             return [
+                [0, 0],
+                [0, 20],
+                [0, 40],
+                [0, 60],
+                [0, 80],
+                [0, 100],
+                // TODO CURVES ARE HARD
             ].map(translate(x, y));
         },
         E: function (x, y) {
@@ -119,18 +126,53 @@ function makeFont(width, height) {
         },
         O: function (x, y) {
             return [
+                // TODO CURVES ARE HARD
             ].map(translate(x, y));
         },
         P: function (x, y) {
             return [
+                [0, 0],
+                [0, 20],
+                [0, 40],
+                [0, 60],
+                [0, 80],
+                [0, 100],
+                [25, 0],
+                [50, 0],
+                [75, 0],
+                [92, 12],
+                [100, 30],
+                [92, 48],
+                [25, 60],
+                [50, 60],
+                [75, 60],
             ].map(translate(x, y));
         },
         R: function (x, y) {
             return [
+                [0, 0],
+                [0, 20],
+                [0, 40],
+                [0, 60],
+                [0, 80],
+                [0, 100],
+                [25, 0],
+                [50, 0],
+                [75, 0],
+                [92, 12],
+                [100, 30],
+                [92, 48],
+                [25, 60],
+                [50, 60],
+                [75, 60],
+                [60, 73],
+                [75, 87],
+                [90, 100],
             ].map(translate(x, y));
         },
         S: function (x, y) {
             return [
+                // TODO CURVES ARE HARD
             ].map(translate(x, y));
         },
         T: function (x, y) {
