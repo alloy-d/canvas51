@@ -9,7 +9,7 @@ function makeFont(width, height) {
 
     var translate = function (x, y) {
         return function (pair) {
-            return [x + pair[0] + r(), y + pair[1] + r()];
+            return [x + w(pair[0]) + r(), y + h(pair[1]) + r()];
         }
     };
 
@@ -21,20 +21,20 @@ function makeFont(width, height) {
         H: function (x, y) {
             return [
                 [0, 0],
-                [0, h(20)],
-                [0, h(40)],
-                [0, h(60)],
-                [0, h(80)],
-                [0, h(100)],
-                [w(25), h(48)],
-                [w(50), h(48)],
-                [w(75), h(48)],
-                [w(100), 0],
-                [w(100), h(20)],
-                [w(100), h(40)],
-                [w(100), h(60)],
-                [w(100), h(80)],
-                [w(100), h(100)],
+                [0, 20],
+                [0, 40],
+                [0, 60],
+                [0, 80],
+                [0, 100],
+                [25, 48],
+                [50, 48],
+                [75, 48],
+                [100, 0],
+                [100, 20],
+                [100, 40],
+                [100, 60],
+                [100, 80],
+                [100, 100],
             ].map(translate(x, y));
         },
         I: function (x, y) { return []; },
