@@ -6,8 +6,12 @@ function makeFont(width, height) {
 
     // Some random noise.
     var r = function (n) { return 1-Math.floor(Math.random()*3); }
-    // Add randomness to a pair.
-    var rp = function (p) { return [p[0]+r(), p[1]+r()]; }
+
+    var translate = function (x, y) {
+        return function (pair) {
+            return [x + pair[0] + r(), y + pair[1] + r()];
+        }
+    };
 
     return {
         A: function (x, y) { return []; },
@@ -16,22 +20,22 @@ function makeFont(width, height) {
         E: function (x, y) { return []; },
         H: function (x, y) {
             return [
-                [x, y],
-                [x, y + h(20)],
-                [x, y + h(40)],
-                [x, y + h(60)],
-                [x, y + h(80)],
-                [x, y + h(100)],
-                [x + w(25), y + h(48)],
-                [x + w(50), y + h(48)],
-                [x + w(75), y + h(48)],
-                [x + w(100), y],
-                [x + w(100), y + h(20)],
-                [x + w(100), y + h(40)],
-                [x + w(100), y + h(60)],
-                [x + w(100), y + h(80)],
-                [x + w(100), y + h(100)],
-            ].map(rp);
+                [0, 0],
+                [0, h(20)],
+                [0, h(40)],
+                [0, h(60)],
+                [0, h(80)],
+                [0, h(100)],
+                [w(25), h(48)],
+                [w(50), h(48)],
+                [w(75), h(48)],
+                [w(100), 0],
+                [w(100), h(20)],
+                [w(100), h(40)],
+                [w(100), h(60)],
+                [w(100), h(80)],
+                [w(100), h(100)],
+            ].map(translate(x, y));
         },
         I: function (x, y) { return []; },
         O: function (x, y) { return []; },
