@@ -31,7 +31,7 @@ var locations = (function (w, h, x, y, text) {
     var locations = [];
 
     for (i = 0; i < words.length; i += 1) {
-        cx = (1000 - (w + 10) * words[i].length) / 2;
+        cx = (1000 - (w + 15) * words[i].length) / 2;
         cy = y + i * (h + 50);
 
         if (words[i][words[i].length-1] === ",") cx += w / 2 + 5;
@@ -41,7 +41,7 @@ var locations = (function (w, h, x, y, text) {
             else
                 locations = locations.append(font[words[i][j]](cx, cy));
 
-            cx += w + 10;
+            cx += w + 15;
         }
     }
 
