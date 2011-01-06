@@ -14,8 +14,8 @@ var Star = new Class({
         this.speed = Math.random() / 10;
         if (this.speed < 0.05) this.speed += 0.03;
 
-        this.dx = (this.x - this.pos.x) * this.speed;
-        this.dy = (this.y - this.pos.y) * this.speed;
+        this.dx = (this.x - this.pos.x) * this.speed * 1.7;
+        this.dy = (this.y - this.pos.y) * this.speed * 1.7;
     },
     draw: function () {
         var x = cx(this.pos.x);
@@ -31,14 +31,17 @@ var Star = new Class({
         this.update();
     },
     update: function () {
-        if (!(this.pos.x <= this.x && this.dx < 0) 
-            && !(this.pos.x >= this.x && this.dx > 0)) {
+        var arrived = function (pos, dest, d) {
+            return (pos <= dest && d < 0) || (pos >= dest && d > 0);
+        }
+        if (!arrived(this.pos.x, this.x, this.dx)) {
                 this.pos.x += this.dx;
+                if (arrived(this.pos.x, this.x, this.dx)) this.pos.x = this.x;
                 this.dx *= 0.95;
             }
-        if (!(this.pos.y <= this.y && this.dy < 0)
-            && !(this.pos.y >= this.y && this.dy > 0)) {
+        if (!arrived(this.pos.y, this.y, this.dy)) {
                 this.pos.y += this.dy;
+                if (arrived(this.pos.y, this.y, this.dy)) this.pos.y = this.y;
                 this.dy *= 0.95;
             }
     }
