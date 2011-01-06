@@ -128,6 +128,15 @@ function makeFont(width, height) {
         },
         Y: function (x, y) {
             return [
+                [0, 0],
+                [17, 20],
+                [33, 40],
+                [67, 40],
+                [83, 20],
+                [100, 0],
+                [50, 60],
+                [50, 80],
+                [50, 100],
             ].map(translate(x, y));
         },
         comma: function (x, y) {
