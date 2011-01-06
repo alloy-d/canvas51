@@ -23,7 +23,7 @@ var clearCanvas = function () {
     context.clearRect(0, 0, WIDTH, HEIGHT);
 }
 
-var font = makeFont(80, 150, 5);
+var font = makeFont(80, 150, 30);
 var locations = font.A(20, 20);
 
 var horizon = makeHorizon();
