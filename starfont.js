@@ -34,7 +34,28 @@ function makeFont(width, height) {
         },
         B: function (x, y) { return []; },
         D: function (x, y) { return []; },
-        E: function (x, y) { return []; },
+        E: function (x, y) {
+            return [
+                [0, 0],
+                [0, 20],
+                [0, 40],
+                [0, 60],
+                [0, 80],
+                [0, 100],
+                [25, 0],
+                [50, 0],
+                [75, 0],
+                [100, 0],
+                [20, 50],
+                [40, 50],
+                [60, 50],
+                [80, 50],
+                [25, 100],
+                [50, 100],
+                [75, 100],
+                [100, 100],
+            ].map(translate(x, y));
+        },
         H: function (x, y) {
             return [
                 [0, 0],
