@@ -26,23 +26,28 @@ var clearCanvas = function () {
 var locations = (function (w, h, x, y, text) {
     var font = makeFont(w, h);
     var cx = x, cy = y;
-    var i = 0;
+    var i = 0, j = 0;
+    var words = text.split(" ");
     var locations = [];
 
-    for (i = 0; i < text.length; i += 1) {
-        if (text[i] === " ") {
-            cx = x;
-            cy += h + 50;
-            continue;
-        }
-        if (text[i] === ",") locations = locations.append(font.comma(cx, cy));
-        else locations = locations.append(font[text[i]](cx, cy));
+    for (i = 0; i < words.length; i += 1) {
+        cx = (1000 - (w + 10) * words[i].length) / 2;
+        cy = y + i * (h + 50);
 
-        cx += w + 6;
+        if (words[i][words[i].length-1] === ",") cx += w / 2 + 5;
+        for (j = 0; j < words[i].length; j += 1) {
+            if (words[i][j] === ",")
+                locations = locations.append(font.comma(cx, cy));
+            else
+                locations = locations.append(font[words[i][j]](cx, cy));
+
+            cx += w + 10;
+        }
     }
 
+
     return locations;
-}(70, 130, 20, 20, "HAPPY BIRTHDAY, SOPHIE"));
+}(70, 130, 0, 180, "HAPPY BIRTHDAY, SOPHIE"));
 
 
 var horizon = makeHorizon();
