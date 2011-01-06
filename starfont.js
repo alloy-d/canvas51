@@ -32,8 +32,14 @@ function makeFont(width, height) {
                 [70, 70],
             ].map(translate(x, y));
         },
-        B: function (x, y) { return []; },
-        D: function (x, y) { return []; },
+        B: function (x, y) {
+            return [
+            ].map(translate(x, y));
+        },
+        D: function (x, y) {
+            return [
+            ].map(translate(x, y));
+        },
         E: function (x, y) {
             return [
                 [0, 0],
@@ -90,10 +96,22 @@ function makeFont(width, height) {
                 [75, 100],
             ].map(translate(x, y));
         },
-        O: function (x, y) { return []; },
-        P: function (x, y) { return []; },
-        R: function (x, y) { return []; },
-        S: function (x, y) { return []; },
+        O: function (x, y) {
+            return [
+            ].map(translate(x, y));
+        },
+        P: function (x, y) {
+            return [
+            ].map(translate(x, y));
+        },
+        R: function (x, y) {
+            return [
+            ].map(translate(x, y));
+        },
+        S: function (x, y) {
+            return [
+            ].map(translate(x, y));
+        },
         T: function (x, y) {
             return [
                 [0, 0],
@@ -108,8 +126,14 @@ function makeFont(width, height) {
                 [50, 100],
             ].map(translate(x, y));
         },
-        Y: function (x, y) { return []; },
-        comma: function (x, y) { return []; },
+        Y: function (x, y) {
+            return [
+            ].map(translate(x, y));
+        },
+        comma: function (x, y) {
+            return [
+            ].map(translate(x, y));
+        },
         space: function (x, y) { return []; },
     };
 }
