@@ -1,7 +1,7 @@
 var canvas = document.getElementById("awesome");
 var context = canvas.getContext("2d");
 
-var dashStarted = false, starBroken = false;
+var dashStarted = false, starBroken = false, movementStarted = false;
 
 var WIDTH, HEIGHT, CENTER;
 var FRAME = 0;
@@ -48,7 +48,6 @@ var locations = (function (w, h, x, y, text) {
     return locations;
 }(70, 130, 0, 180, "HAPPY BIRTHDAY, SOPHIE"));
 
-
 var horizon = makeHorizon();
 var star = makeStar(500, 500, 100);
 var platform = makePlatform();
@@ -57,8 +56,20 @@ var twinkles = makeTwinkles(locations);
 var text = makeText();
 var unicorn = makeUnicorn();
 
+var startMovement = function () {
+    if (movementStarted) return;
+    movementStarted = true;
+    horizon.move();
+    platform.move();
+}
+
 var drawFrame = function () {
     clearCanvas();
+
+    if (movementStarted) {
+        horizon.update();
+        platform.update();
+    }
 
     horizon.draw();
     star.draw();
@@ -71,6 +82,7 @@ var drawFrame = function () {
     if (starBroken) {
         starField.draw();
         twinkles.draw();
+        startMovement();
     }
 
     text.draw();
