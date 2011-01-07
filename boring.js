@@ -3,7 +3,6 @@ var cx = function (x) { return x * WIDTH / 1000; };
 var cy = function (y) { return y * HEIGHT / 1000; };
 
 // Map polar coordinates to rectangular coordinates.
-// TODO: account for the fact that the y-axis is flipped on a canvas.
 var rect = function (r, theta, cx, cy) {
     if (typeof(cx) !== "number" || typeof(cy) !== "number") {
         cx = 0;
