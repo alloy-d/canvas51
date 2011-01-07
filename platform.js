@@ -2,8 +2,12 @@ var makePlatform = function () {
     var step = 0;
     var moving = false;
 
+    // y-offset caused by "camera" motion.
     var yo = function () { return 820 * (step/100); }
+
+    // Percentage to y-coordinate, including motion offset.
     var py = function (y) { return cy(y - yo()); }
+
     return {
         draw: function () {
             context.save();

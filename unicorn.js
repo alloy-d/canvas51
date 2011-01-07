@@ -6,6 +6,7 @@ var makeUnicorn = function () {
     };
     var dx = 50;
 
+    // Steps at which the colors appear.
     var start = {
         blue: 0,
         green: 10,
@@ -14,6 +15,8 @@ var makeUnicorn = function () {
         violet: 16,
         red: 20,
     };
+
+    // Steps at which the colors finish appearing.
     var end = {
         blue: start.blue + 20,
         green: start.green + 13,
@@ -22,6 +25,8 @@ var makeUnicorn = function () {
         violet: start.violet + 11,
         red: start.red + 10,
     };
+
+    // The colors.
     var fill = {
         blue: "#00aaff",
         green: "#00ffaa",
@@ -30,6 +35,8 @@ var makeUnicorn = function () {
         violet: "#ff00ff",
         red: "#ff0000",
     };
+
+    // A fuzz number to make things pretty.
     var offset = {
         blue: 0,
         green: 15,
@@ -38,16 +45,22 @@ var makeUnicorn = function () {
         violet: 43,
         red: 50,
     };
+
+    // True if a color appears on the top of the dash.
     var top = {
         blue: true,
         green: true,
         yellow: true,
         red: true,
     };
+
+    // True if a color also appears on the bottom of the dash.
     var bottom = {
         blue: true,
         red: true,
     };
+
+    // Color names, in order of drawing.
     var colors = [
         "red",
         "violet",
