@@ -71,10 +71,7 @@ var makeUnicorn = function () {
     ];
 
     var endpoint = function(color) {
-        var l = end[color] - start[color];
-        var t = step - start[color];
         var p = (step - start[color]) / (end[color] - start[color]);
-        if (t > l) t = l;
         if (step > end[color]) p = 1;
 
         return {
