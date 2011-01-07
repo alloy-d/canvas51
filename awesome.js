@@ -34,7 +34,7 @@ var locations = (function (w, h, x, y, text) {
         cx = (1000 - (w + 15) * words[i].length) / 2;
         cy = y + i * (h + 50);
 
-        if (words[i][words[i].length-1] === ",") cx += w / 2 + 5;
+        if (words[i][words[i].length-1] === ",") cx += w / 2 + 7.5;
         for (j = 0; j < words[i].length; j += 1) {
             if (words[i][j] === ",")
                 locations = locations.append(font.comma(cx, cy));
@@ -44,7 +44,6 @@ var locations = (function (w, h, x, y, text) {
             cx += w + 15;
         }
     }
-
 
     return locations;
 }(70, 130, 0, 180, "HAPPY BIRTHDAY, SOPHIE"));
