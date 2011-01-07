@@ -56,6 +56,7 @@ var twinkles = makeTwinkles(locations);
 var text = makeText();
 var unicorn = makeUnicorn();
 var ocean = makeOcean();
+var fireworks = makeFireworks();
 
 var startMovement = function () {
     if (movementStarted) return;
@@ -88,10 +89,14 @@ var drawFrame = function () {
     }
 
     ocean.draw();
+    fireworks.draw();
     text.draw();
 
     FRAME += 1;
 };
+
+fireworks.add(500, 500);
+setInterval(function () { fireworks.add(Math.random()*1000, Math.random()*1000); }, 500);
 
 window.addEvent('load', function () {
     resizeCanvas();
