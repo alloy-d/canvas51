@@ -55,12 +55,14 @@ var starField = makeStarField(1000);
 var twinkles = makeTwinkles(locations);
 var text = makeText();
 var unicorn = makeUnicorn();
+var ocean = makeOcean();
 
 var startMovement = function () {
     if (movementStarted) return;
     movementStarted = true;
     horizon.move();
     platform.move();
+    ocean.move();
 };
 
 var drawFrame = function () {
@@ -85,6 +87,7 @@ var drawFrame = function () {
         startMovement();
     }
 
+    ocean.draw();
     text.draw();
 
     FRAME += 1;
