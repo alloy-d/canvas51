@@ -1,4 +1,4 @@
-function makeFont(width, height) {
+var makeFont = function (width, height) {
     // Percentage to actual font width.
     var w = function (d) { return width * d / 100; }
     // Percentage to actual font height.
@@ -251,4 +251,5 @@ function makeFont(width, height) {
             ].map(translate(x, y));
         },
     };
-}
+};
+

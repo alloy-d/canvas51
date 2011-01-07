@@ -28,7 +28,7 @@ var TwinklingStar = new Class({
     },
 });
 
-function makeTwinkles(locations) {
+var makeTwinkles = function (locations) {
     var stars = [];
     var i = 0;
 
@@ -48,5 +48,5 @@ function makeTwinkles(locations) {
         },
         locations: locations,
     };
-}
+};
 

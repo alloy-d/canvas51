@@ -1,4 +1,4 @@
-function makeUnicorn() {
+var makeUnicorn = function () {
     var step = 0;
     var pos = {
         x: -700,
@@ -118,5 +118,5 @@ function makeUnicorn() {
             pos.x += dx;
         },
     };
-}
+};
 

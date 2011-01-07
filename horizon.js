@@ -1,4 +1,4 @@
-function makeHorizon() {
+var makeHorizon = function () {
     var gradient;
     var moving = false;
     var step = 0;
@@ -25,5 +25,5 @@ function makeHorizon() {
             this.resize();
         },
     };
-}
+};
 

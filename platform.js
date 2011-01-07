@@ -1,4 +1,4 @@
-function makePlatform() {
+var makePlatform = function () {
     var step = 0;
     var moving = false;
 

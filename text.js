@@ -1,4 +1,4 @@
-function makeText() {
+var makeText = function () {
     var size = 48;
 
     return {
@@ -23,5 +23,5 @@ function makeText() {
             if (dashStarted && size > 30) size -= 2;
         },
     }
-}
+};
 

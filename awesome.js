@@ -17,11 +17,11 @@ var resizeCanvas = function () {
 
     canvas.width = WIDTH;
     canvas.height = HEIGHT;
-}
+};
 
 var clearCanvas = function () {
     context.clearRect(0, 0, WIDTH, HEIGHT);
-}
+};
 
 var locations = (function (w, h, x, y, text) {
     var font = makeFont(w, h);
@@ -61,7 +61,7 @@ var startMovement = function () {
     movementStarted = true;
     horizon.move();
     platform.move();
-}
+};
 
 var drawFrame = function () {
     clearCanvas();
@@ -88,7 +88,7 @@ var drawFrame = function () {
     text.draw();
 
     FRAME += 1;
-}
+};
 
 window.addEvent('load', function () {
     resizeCanvas();

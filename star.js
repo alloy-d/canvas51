@@ -1,4 +1,4 @@
-function makeStar(centerX, centerY, radius) {
+var makeStar = function (centerX, centerY, radius) {
     var cCenterX, cCenterY, cRadius, cSpikes, cMidpoints;
     var spikes = [], midpoints = [], faceFills = [];
     var i = 0;
@@ -81,6 +81,5 @@ function makeStar(centerX, centerY, radius) {
             context.restore();
         },
     };
-}
-
+};
 
