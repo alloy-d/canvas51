@@ -14,7 +14,7 @@ var Dolphin = new Class({
         this.canvas = document.createElement("canvas");
         this.canvas.width = options.width || 150;
         this.canvas.height = options.height || 45;
-        this.context = canvas.getContext("2d");
+        this.context = this.canvas.getContext("2d");
     },
     draw: function () {
         var context = this.context;
