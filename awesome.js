@@ -91,6 +91,7 @@ var drawFrame = function () {
         twinkles.draw();
         dolphins.draw();
         startMovement();
+        if (wr(500) > 400) dolphins.add(wr(1000));
     }
 
     ocean.draw();
