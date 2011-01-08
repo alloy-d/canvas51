@@ -6,7 +6,7 @@ var Dolphin = new Class({
             y: options.y,
         };
         this.dx = options.dx || 5;
-        this.dy = options.dy || -100;
+        this.dy = options.dy || -60;
         this.hatColor = colors[wr(colors.length)];
         this.puffColor = colors[wr(colors.length)];
         while (this.puffColor === this.hatColor) {
@@ -138,6 +138,9 @@ var Dolphin = new Class({
         context.restore();
     },
     place: function () {
+        this.pos.x += this.dx;
+        this.pos.y += this.dy;
+        this.dy += 3.8;
         if (this.pos.y > 1000 && this.dy > 0) return false;
         context.drawImage(this.canvas, cx(this.pos.x), cy(this.pos.y));
         return true;
@@ -148,7 +151,7 @@ var makeDolphins = function () {
     var dolphins = [];
     return {
         add: function (x) {
-            var dolphin = new Dolphin({x: x, y: 800});
+            var dolphin = new Dolphin({x: x, y: 1100});
             dolphin.draw();
             dolphins[dolphins.length] = dolphin;
         },
