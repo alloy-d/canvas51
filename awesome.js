@@ -65,7 +65,7 @@ var startMovement = function () {
     horizon.move();
     platform.move();
     ocean.move();
-    setInterval(function () { fireworks.add(100+Math.random()*800, Math.random()*800); }, 200);
+    setInterval(function () { fireworks.add(100+Math.random()*800, Math.random()*800); }, 500);
 };
 
 var drawFrame = function () {
@@ -86,7 +86,7 @@ var drawFrame = function () {
 
     if (starBroken) {
         starField.draw();
-        //twinkles.draw();
+        twinkles.draw();
         startMovement();
     }
 
