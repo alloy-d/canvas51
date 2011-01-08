@@ -5,7 +5,7 @@ var Dolphin = new Class({
             x: options.x,
             y: options.y,
         };
-        this.dx = options.dx || 5;
+        this.dx = options.dx || 10;
         this.dy = options.dy || -60;
         this.hatColor = colors[wr(colors.length)];
         this.puffColor = colors[wr(colors.length)];
@@ -138,11 +138,17 @@ var Dolphin = new Class({
         context.restore();
     },
     place: function () {
+        if (this.pos.y > 1000 && this.dy > 0) return false;
+
+        context.save();
+        context.translate(cx(this.pos.x), cy(this.pos.y));
+        context.rotate(-Math.PI/5 + Math.PI/5 * (this.dy / 60 + 1));
+        context.drawImage(this.canvas, 0, 0);
+        context.restore();
+
         this.pos.x += this.dx;
         this.pos.y += this.dy;
         this.dy += 3.8;
-        if (this.pos.y > 1000 && this.dy > 0) return false;
-        context.drawImage(this.canvas, cx(this.pos.x), cy(this.pos.y));
         return true;
     },
 });
