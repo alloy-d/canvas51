@@ -15,3 +15,6 @@ var rect = function (r, theta, cx, cy) {
     };
 };
 
+// Get a whole random number < n.
+var wr = function (n) { return Math.floor(Math.random() * n); };
+

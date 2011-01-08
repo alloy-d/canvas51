@@ -57,6 +57,7 @@ var text = makeText();
 var unicorn = makeUnicorn();
 var ocean = makeOcean();
 var fireworks = makeFireworks();
+var dolphin = makeDolphin();
 
 var startMovement = function () {
     if (movementStarted) return;
@@ -93,6 +94,9 @@ var drawFrame = function () {
     fireworks.draw();
     text.draw();
 
+    // TODO
+    dolphin.draw();
+
     FRAME += 1;
 };
 
@@ -100,6 +104,7 @@ window.addEvent('load', function () {
     resizeCanvas();
     horizon.resize();
     star.resize();
+    dolphin.resize(); // TODO
     drawFrame();
     setInterval(drawFrame, 30);
 });
