@@ -21,7 +21,7 @@ var Firework = new Class({
     draw: function () {
         var i = 0, theta, r, p, beta, alpha;
         var cosbeta, cosalpha, sinbeta, sinalpha;
-        if (this.step === 20) return;
+        if (this.step === 20) return false;
 
         beta = this.angle;
         sinbeta = Math.sin(beta);
@@ -47,6 +47,7 @@ var Firework = new Class({
         }
         context.restore();
         this.step += 1;
+        return true;
     },
 });
 
@@ -59,7 +60,7 @@ var makeFireworks = function () {
             fireworks[fireworks.length] = new Firework({x: x, y: y});
         },
         draw: function () {
-            fireworks.each(function (f) { f.draw(); });
+            fireworks = fireworks.filter(function (f) { return f.draw(); });
         },
     };
 };
