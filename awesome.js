@@ -64,6 +64,7 @@ var startMovement = function () {
     horizon.move();
     platform.move();
     ocean.move();
+    setInterval(function () { fireworks.add(Math.random()*1000, Math.random()*1000); }, 500);
 };
 
 var drawFrame = function () {
@@ -94,9 +95,6 @@ var drawFrame = function () {
 
     FRAME += 1;
 };
-
-fireworks.add(500, 500);
-setInterval(function () { fireworks.add(Math.random()*1000, Math.random()*1000); }, 500);
 
 window.addEvent('load', function () {
     resizeCanvas();
