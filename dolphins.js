@@ -153,7 +153,7 @@ var makeDolphins = function () {
             dolphins[dolphins.length] = dolphin;
         },
         draw: function () {
-            dolphins.filter(function (d) { return d.place(); });
+            dolphins = dolphins.filter(function (d) { return d.place(); });
         },
     };
 };
