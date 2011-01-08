@@ -18,8 +18,10 @@ var Dolphin = new Class({
     },
     draw: function () {
         var context = this.context;
-        var cx = function (x) { return x * (this.canvas.width / 1000); };
-        var cy = function (y) { return y * (this.canvas.height / 1000); };
+        var width = this.canvas.width;
+        var height = this.canvas.height;
+        var cx = function (x) { return x * (width / 1000); };
+        var cy = function (y) { return y * (height / 1000); };
 
         context.save();
 

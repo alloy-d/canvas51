@@ -91,8 +91,6 @@ var drawFrame = function () {
         startMovement();
     }
 
-    if (wr(500) > 400) dolphins.add(wr(1000));
-
     ocean.draw();
     fireworks.draw();
     text.draw();
