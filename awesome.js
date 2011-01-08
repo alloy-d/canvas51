@@ -64,7 +64,7 @@ var startMovement = function () {
     horizon.move();
     platform.move();
     ocean.move();
-    setInterval(function () { fireworks.add(Math.random()*1000, Math.random()*1000); }, 500);
+    setInterval(function () { fireworks.add(100+Math.random()*800, Math.random()*800); }, 500);
 };
 
 var drawFrame = function () {
