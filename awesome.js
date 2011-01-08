@@ -57,7 +57,7 @@ var text = makeText();
 var unicorn = makeUnicorn();
 var ocean = makeOcean();
 var fireworks = makeFireworks();
-var dolphin = makeDolphin();
+var dolphins = makeDolphins();
 
 var startMovement = function () {
     if (movementStarted) return;
@@ -87,15 +87,15 @@ var drawFrame = function () {
     if (starBroken) {
         starField.draw();
         twinkles.draw();
+        dolphins.draw();
         startMovement();
     }
+
+    if (wr(500) > 400) dolphins.add(wr(1000));
 
     ocean.draw();
     fireworks.draw();
     text.draw();
-
-    // TODO
-    dolphin.draw();
 
     FRAME += 1;
 };
@@ -104,7 +104,6 @@ window.addEvent('load', function () {
     resizeCanvas();
     horizon.resize();
     star.resize();
-    dolphin.resize(); // TODO
     drawFrame();
     setInterval(drawFrame, 30);
 });
