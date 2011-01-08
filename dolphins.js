@@ -1,5 +1,8 @@
 var makeDolphin = function () {
-    var hatColor = ["red", "green", "blue", "yellow", "purple"][wr(5)];
+    var colors = ["red", "green", "blue", "yellow", "purple"];
+    var hatColor = colors[wr(colors.length)];
+    var puffColor = colors[wr(colors.length)];
+    while (puffColor === hatColor) puffColor = colors[wr(colors.length)];
     var dim = { w: canvas.width, h: canvas.height };
     if (dim.h > dim.w * 0.3) {
         dim.h = dim.w * 0.3;
@@ -112,6 +115,23 @@ var makeDolphin = function () {
             context.fillStyle = "#111122";
             context.beginPath();
             context.arc(cx(850), cy(600), cx(8), 0, 2*Math.PI, false);
+            context.fill();
+            context.closePath();
+
+            // PARTY HAT!
+            context.fillStyle = hatColor;
+            context.beginPath();
+            context.moveTo(cx(830), cy(322));
+            context.quadraticCurveTo(cx(850), cy(410),
+                                     cx(890), cy(407));
+            context.lineTo(cx(896), cy(100));
+            context.lineTo(cx(830), cy(322));
+            context.fill();
+            context.closePath();
+
+            context.fillStyle = puffColor;
+            context.beginPath();
+            context.arc(cx(896), cy(100), cx(9), 0, 2*Math.PI);
             context.fill();
             context.closePath();
 
