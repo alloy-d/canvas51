@@ -68,7 +68,9 @@ var startMovement = function () {
     setInterval(function () { fireworks.add(100+Math.random()*800, Math.random()*800); }, 500);
 };
 
+var STOP_THIS_NONSENSE = false;
 var drawFrame = function () {
+    if (STOP_THIS_NONSENSE) return;
     clearCanvas();
 
     if (movementStarted) {
