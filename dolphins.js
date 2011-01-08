@@ -2,6 +2,7 @@ var makeDolphin = function () {
     var colors = ["red", "green", "blue", "yellow", "purple"];
     var hatColor = colors[wr(colors.length)];
     var puffColor = colors[wr(colors.length)];
+    hatColor = "blue"; puffColor = "yellow";
     while (puffColor === hatColor) puffColor = colors[wr(colors.length)];
     var dim = { w: canvas.width, h: canvas.height };
     if (dim.h > dim.w * 0.3) {
@@ -27,6 +28,8 @@ var makeDolphin = function () {
         draw: function () {
             context.save();
 
+            context.rotate(-Math.PI/8);
+            context.translate(cx(-240), cy(1700));
             context.fillStyle = "#aabbcc";
             // The left flipper.
             context.beginPath();
