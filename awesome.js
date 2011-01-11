@@ -24,6 +24,14 @@ var clearCanvas = function () {
     context.clearRect(0, 0, WIDTH, HEIGHT);
 };
 
+var sounds = {
+    star: document.getElementById("star"),
+    unicorn: document.getElementById("unicorn"),
+    dolphins: document.getElementById("dolphins"),
+    moreDolphins: document.getElementById("moreDolphins"),
+}
+
+
 var locations = (function (w, h, x, y, text) {
     var font = makeFont(w, h);
     var cx = x, cy = y;
@@ -84,7 +92,9 @@ var drawFrame = function () {
     platform.draw();
 
     if (dashStarted) {
-        unicorn.draw();
+        if (sounds.unicorn === null || sounds.unicorn.ended) {
+            unicorn.draw();
+        }
     }
 
     if (starBroken) {
@@ -98,6 +108,9 @@ var drawFrame = function () {
                 dolphins.addShouter(200);
                 dolphins.addShouter(280);
                 dolphins.addShouter(360);
+                if (sounds.dolphins !== null) sounds.dolphins.play();
+            } else if (FRAME-startFrame === 18) {
+                if (sounds.moreDolphins !== null) sounds.moreDolphins.play();
             } else if (FRAME-startFrame === 40) {
                 dolphins.addShouter(600);
                 dolphins.addShouter(680);
@@ -119,6 +132,7 @@ window.addEvent('load', function () {
     horizon.resize();
     star.resize();
     drawFrame();
+    if (sounds.star !== null) sounds.star.play();
     setInterval(drawFrame, 30);
 });
 
@@ -133,6 +147,7 @@ window.addEvent('keydown', function (event) {
     if (dashStarted) return;
     if (event.key === 'x') {
         dashStarted = true;
+        if (sounds.unicorn !== null) sounds.unicorn.play();
         //starBroken = true;
     }
 });
