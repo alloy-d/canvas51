@@ -10,6 +10,12 @@ while line = mapfile.gets do
   map[parts[0]] = parts[1]
 end
 
+line = infile.gets
+outfile.puts line
+outfile.puts "<!-- Made by Adam Lloyd (adam@alloy-d.net) for Sophie, one of the awesomest people in the world. -->"
+outfile.puts "<!-- Don't look at this. Check out http://github.com/alloy-d/canvas51/ instead. -->"
+
+
 while line = infile.gets do
   /<link rel="stylesheet" href="([^"]+)"/.match(line) do |m|
     STDERR.puts "stylesheet #{m[1]}"
@@ -59,7 +65,4 @@ while line = infile.gets do
 
   outfile.puts line
 end
-
-outfile.puts "<!-- Made by Adam Lloyd (adam@alloy-d.net) for Sophie, one of the awesomest people in the world. -->"
-outfile.puts "<!-- Don't look at this. Check out http://github.com/alloy-d/canvas51/ instead. -->"
 
