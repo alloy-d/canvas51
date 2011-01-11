@@ -1,7 +1,7 @@
 var makeUnicorn = function () {
-    var step = 0;
+    var step = 18;
     var pos = {
-        x: -700,
+        x: 000,
         y: 500
     };
     var dx = 50;
