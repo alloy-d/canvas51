@@ -65,7 +65,6 @@ var startMovement = function () {
     horizon.move();
     platform.move();
     ocean.move();
-    setInterval(function () { fireworks.add(100+Math.random()*800, Math.random()*800); }, 500);
 };
 
 var STOP_THIS_NONSENSE = false;
@@ -89,13 +88,13 @@ var drawFrame = function () {
     if (starBroken) {
         starField.draw();
         twinkles.draw();
+        fireworks.draw();
         dolphins.draw();
         startMovement();
-        if (wr(500) > 400) dolphins.add(wr(900)-100);
+        if (!ocean.moving() && wr(500) > 470) dolphins.add(wr(1000));
     }
 
     ocean.draw();
-    fireworks.draw();
     text.draw();
 
     FRAME += 1;

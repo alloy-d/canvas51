@@ -5,6 +5,7 @@ var Dolphin = new Class({
             x: options.x,
             y: options.y,
         };
+        this.rotations = options.rotations;
         this.dx = options.dx || 10;
         this.dy = options.dy || -60;
         this.hatColor = colors[wr(colors.length)];
@@ -12,6 +13,23 @@ var Dolphin = new Class({
         while (this.puffColor === this.hatColor) {
             this.puffColor = colors[wr(colors.length)];
         }
+
+        if (typeof(options.numFireworks) === "number") {
+            this.numFireworks = options.numFireworks;
+        } else {
+            this.numFireworks = 2 + wr(2);
+        }
+
+        this.angle = {
+            start: -Math.PI/2,
+            end: Math.PI/2,
+        };
+        this.t = {
+            start: 0,
+            peak: 100,
+            end: 100,
+            cur: 0,
+        };
 
         this.canvas = document.createElement("canvas");
         this.canvas.width = options.width || 150;
@@ -22,7 +40,9 @@ var Dolphin = new Class({
         var context = this.context;
         var width = this.canvas.width;
         var height = this.canvas.height;
+        var cw = function (w) { return w * (width / 1000); };
         var cx = function (x) { return x * (width / 1000); };
+        if (this.dx < 0) cx = function (x) { return (1000-x) * (width / 1000); };
         var cy = function (y) { return y * (height / 1000); };
 
         context.save();
@@ -107,14 +127,14 @@ var Dolphin = new Class({
         // Behind the eye.
         context.fillStyle = "#dde0ee";
         context.beginPath();
-        context.arc(cx(849), cy(596), cx(10), 0, 2*Math.PI, false);
+        context.arc(cx(849), cy(596), cw(10), 0, 2*Math.PI, false);
         context.fill();
         context.closePath();
 
         // The eye.
         context.fillStyle = "#111122";
         context.beginPath();
-        context.arc(cx(850), cy(600), cx(8), 0, 2*Math.PI, false);
+        context.arc(cx(850), cy(600), cw(8), 0, 2*Math.PI, false);
         context.fill();
         context.closePath();
 
@@ -131,24 +151,43 @@ var Dolphin = new Class({
 
         context.fillStyle = this.puffColor;
         context.beginPath();
-        context.arc(cx(896), cy(100), cx(9), 0, 2*Math.PI);
+        context.arc(cx(896), cy(100), cw(9), 0, 2*Math.PI);
         context.fill();
         context.closePath();
 
         context.restore();
     },
     place: function () {
+        var angle = this.angle.start * (this.t.end-this.t.cur)/this.t.end;
+        angle += this.angle.end * this.t.cur/this.t.end;
+        if (this.dx > 0) angle += (this.t.cur/this.t.end) * Math.PI * this.rotations;
+        if (this.dx < 0) angle += (this.t.cur/this.t.end) * Math.PI * this.rotations;
         if (this.pos.y > 1000 && this.dy > 0) return false;
 
         context.save();
         context.translate(cx(this.pos.x), cy(this.pos.y));
-        context.rotate(-Math.PI/5 + Math.PI/5 * (this.dy / 60 + 1));
-        context.drawImage(this.canvas, 0, 0);
+        context.rotate(angle);
+        context.drawImage(this.canvas, -this.canvas.width/2, -this.canvas.height/2);
         context.restore();
+
+        if (this.pos.y > 1000 && this.pos.y + this.dy <= 1000) {
+            this.t.cur = 0;
+            this.t.peak = Math.floor(-this.dy / 3.8);
+            this.t.end = this.t.peak * 2;
+            this.angle.start = Math.atan(this.dy / this.dx);
+            this.angle.end = this.rotations * Math.PI - this.angle.start;
+        }
 
         this.pos.x += this.dx;
         this.pos.y += this.dy;
         this.dy += 3.8;
+        if (this.t.cur < this.t.end) this.t.cur += 1;
+
+        if (this.t.cur === Math.floor(this.t.end / 3) ||
+            (this.numFireworks === 3 && this.t.cur === this.t.peak) ||
+            this.t.cur === Math.ceil(2*this.t.end/3)) {
+            fireworks.add(this.pos.x, this.pos.y);
+        }
         return true;
     },
 });
@@ -157,7 +196,14 @@ var makeDolphins = function () {
     var dolphins = [];
     return {
         add: function (x) {
-            var dolphin = new Dolphin({x: x, y: 1100});
+            var rdy = Math.random() * 30;
+            var dolphin = new Dolphin({
+                x: x,
+                y: 1100,
+                dx: (x>500)?((0-x)/40):(1000-x)/40,
+                dy: -50 - rdy,
+                rotations: wr(Math.ceil(rdy/7)),
+            });
             dolphin.draw();
             dolphins[dolphins.length] = dolphin;
         },

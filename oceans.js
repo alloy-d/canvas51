@@ -27,6 +27,7 @@ var makeOcean = function () {
             this.update();
         },
         move: function () { moving = true; },
+        moving: function () { return moving; },
         update: function () {
             if (moving && step == 100) moving = false;
             if (moving) step += 1;
