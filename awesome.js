@@ -155,3 +155,12 @@ window.addEvent('keydown', function (event) {
     }
 });
 
+window.addEvent('domready', function () {
+    var w, text = "Gimme a sec... ;D";
+    resizeCanvas();
+    context.font = "italic 48px Georgia, serif";
+    context.fillStyle = "white";
+    w = context.measureText(text).width;
+    context.fillText(text, (WIDTH-w)/2, HEIGHT * 0.45);
+});
+
