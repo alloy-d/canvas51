@@ -1,9 +1,10 @@
 var makeText = function () {
     var size = 48;
+    var hidden = false;
 
     return {
         draw: function () {
-            if (dashStarted && size <= 30) return;
+            if (hidden && size <= 30) return;
             var fillColor = "#cc";
             var t = Math.floor(Math.sin(FRAME/1.5) * 32.5);
 
@@ -20,8 +21,9 @@ var makeText = function () {
             context.fillText("DASH (X) ! ! !", (WIDTH - t) / 2, HEIGHT * 0.8);
             context.restore();
 
-            if (dashStarted && size > 30) size -= 2;
+            if (hidden && size > 30) size -= 2;
         },
+        hide: function () { hidden = true; },
     }
 };
 

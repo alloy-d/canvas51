@@ -76,6 +76,7 @@ var startMovement = function () {
     horizon.move();
     platform.move();
     ocean.move();
+    text.hide();
     if (sounds.broken !== null) sounds.broken.play();
 };
 
