@@ -2,6 +2,7 @@ var canvas = document.getElementById("awesome");
 var context = canvas.getContext("2d");
 
 var dashStarted = false, starBroken = false, movementStarted = false;
+var startFrame = -1;
 
 var WIDTH, HEIGHT, CENTER;
 var FRAME = 0;
@@ -61,6 +62,7 @@ var dolphins = makeDolphins();
 
 var startMovement = function () {
     if (movementStarted) return;
+    startFrame = FRAME;
     movementStarted = true;
     horizon.move();
     platform.move();
@@ -91,7 +93,19 @@ var drawFrame = function () {
         fireworks.draw();
         dolphins.draw();
         startMovement();
-        if (!ocean.moving() && wr(500) > 470) dolphins.add(wr(1000));
+        if (ocean.moving()) {
+            if (FRAME-startFrame === 5) {
+                dolphins.addShouter(200);
+                dolphins.addShouter(280);
+                dolphins.addShouter(360);
+            } else if (FRAME-startFrame === 40) {
+                dolphins.addShouter(600);
+                dolphins.addShouter(680);
+                dolphins.addShouter(760);
+            }
+        } else {
+            if (wr(500) > 470) dolphins.add(wr(1000));
+        }
     }
 
     ocean.draw();

@@ -162,7 +162,7 @@ var Dolphin = new Class({
         angle += this.angle.end * this.t.cur/this.t.end;
         if (this.dx > 0) angle += (this.t.cur/this.t.end) * Math.PI * this.rotations;
         if (this.dx < 0) angle += (this.t.cur/this.t.end) * Math.PI * this.rotations;
-        if (this.pos.y > 1000 && this.dy > 0) return false;
+        if (this.pos.y > 1100 && this.dy > 0) return false;
 
         context.save();
         context.translate(cx(this.pos.x), cy(this.pos.y));
@@ -183,9 +183,10 @@ var Dolphin = new Class({
         this.dy += 3.8;
         if (this.t.cur < this.t.end) this.t.cur += 1;
 
-        if (this.t.cur === Math.floor(this.t.end / 3) ||
+        if (this.numFireworks > 0 && 
+            (this.t.cur === Math.floor(this.t.end / 3) ||
             (this.numFireworks === 3 && this.t.cur === this.t.peak) ||
-            this.t.cur === Math.ceil(2*this.t.end/3)) {
+            this.t.cur === Math.ceil(2*this.t.end/3))) {
             fireworks.add(this.pos.x, this.pos.y);
         }
         return true;
@@ -203,6 +204,18 @@ var makeDolphins = function () {
                 dx: (x>500)?((0-x)/40):(1000-x)/40,
                 dy: -50 - rdy,
                 rotations: wr(Math.ceil(rdy/7)),
+            });
+            dolphin.draw();
+            dolphins[dolphins.length] = dolphin;
+        },
+        addShouter: function (x) {
+            var dolphin = new Dolphin({
+                x: x,
+                y: 1100,
+                dx: 5,
+                dy: -40,
+                rotations: 0,
+                numFireworks: 0,
             });
             dolphin.draw();
             dolphins[dolphins.length] = dolphin;
