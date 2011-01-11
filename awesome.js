@@ -29,6 +29,7 @@ var sounds = {
     unicorn: document.getElementById("unicorn"),
     dolphins: document.getElementById("dolphins"),
     moreDolphins: document.getElementById("moreDolphins"),
+    broken: document.getElementById("broken"),
 }
 
 
@@ -75,6 +76,7 @@ var startMovement = function () {
     horizon.move();
     platform.move();
     ocean.move();
+    if (sounds.broken !== null) sounds.broken.play();
 };
 
 var STOP_THIS_NONSENSE = false;
