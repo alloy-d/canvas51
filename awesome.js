@@ -29,7 +29,6 @@ var sounds = {
     unicorn: document.getElementById("unicorn"),
     dolphins: document.getElementById("dolphins"),
     moreDolphins: document.getElementById("moreDolphins"),
-    always: document.getElementById("always"),
 }
 
 
@@ -76,7 +75,6 @@ var startMovement = function () {
     horizon.move();
     platform.move();
     ocean.move();
-    sounds.always.play();
 };
 
 var STOP_THIS_NONSENSE = false;
@@ -117,8 +115,6 @@ var drawFrame = function () {
                 dolphins.addShouter(600);
                 dolphins.addShouter(680);
                 dolphins.addShouter(760);
-            } else if (FRAME-startFrame === 100 && sounds.always !== null) {
-                //sounds.always.play();
             }
         } else {
             if (wr(500) > 470) dolphins.add(wr(1000));
